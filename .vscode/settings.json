@@ -66,5 +66,10 @@
     "explorer.fileNesting.patterns": {
         "*.sln": "*.csproj"
     },
-    "dotnet.defaultSolution": "vroid-game-template.sln"
+    "dotnet.defaultSolution": "vroid-game-template.sln",
+    "cSpell.words": [
+      "Mixamo",
+      "Rokoko",
+      "vroid"
+    ]
 }
