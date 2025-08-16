@@ -87,5 +87,7 @@ crashlytics-build.properties
 .DS_Store
 *.pem
 
+# ライセンスの関係やユーザーデータが含まれる可能性がある関係上、除外する必要があるファイル
 /Assets/TextMesh Pro/
+/Assets/Starter Assets/
 /ProjectSettings/EditorUserSettings.asset
