@@ -9,16 +9,16 @@ namespace TinyShrine.Base.Editor
     public static class BulkAssignTMPFont_Limited
     {
         // 対象フォルダ（必要に応じて増減OK）
-        private static readonly string[] SceneFolders = { "Assets/Scenes" };
-        private static readonly string[] PrefabFolders = { "Assets/Prefabs" };
+        private static readonly string[] SceneFolders = { "Assets/Scenes", "Assets/Common/Scenes" };
+        private static readonly string[] PrefabFolders = { "Assets/Prefabs", "Assets/Common/Prefabs" };
 
-        [MenuItem("Tools/TMP/Assign Selected Font (Null Only) in Scenes+Prefabs")]
+        [MenuItem("Tools/TMP/Assign Default Font (Null Only) in Scenes+Prefabs")]
         public static void AssignNullOnly()
         {
             Run(assignAll: false);
         }
 
-        [MenuItem("Tools/TMP/Assign Selected Font (Force All) in Scenes+Prefabs")]
+        [MenuItem("Tools/TMP/Assign Default Font (Force All) in Scenes+Prefabs")]
         public static void AssignForceAll()
         {
             Run(assignAll: true);
@@ -26,12 +26,12 @@ namespace TinyShrine.Base.Editor
 
         private static void Run(bool assignAll)
         {
-            var font = Selection.objects.OfType<TMP_FontAsset>().FirstOrDefault();
+            var font = AssetDatabase.LoadAssetAtPath<TMP_FontAsset>("Assets/Common/Fonts/MPLUS2-Medium SDF.asset");
             if (font == null)
             {
                 EditorUtility.DisplayDialog(
                     "TMP Font 一括適用",
-                    "Project ウィンドウで TMP_FontAsset（.asset）を1つ選択してから実行してください。",
+                    "指定されたフォント（Assets/Common/Fonts/MPLUS2-Medium SDF.asset）が見つかりません。",
                     "OK"
                 );
                 return;
