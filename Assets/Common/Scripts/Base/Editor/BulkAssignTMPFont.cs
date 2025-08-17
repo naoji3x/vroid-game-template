@@ -6,7 +6,7 @@ using TMPro;
 
 namespace TinyShrine.Base.Editor
 {
-    public static class BulkAssignTMPFont_Limited
+    public static class BulkAssignTMPFont
     {
         // 対象フォルダ（必要に応じて増減OK）
         private static readonly string[] SceneFolders = { "Assets/Scenes", "Assets/Common/Scenes" };
