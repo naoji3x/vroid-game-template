@@ -88,6 +88,8 @@ crashlytics-build.properties
 *.pem
 
 # ライセンスの関係やユーザーデータが含まれる可能性がある関係上、除外する必要があるファイル
-/Assets/TextMesh Pro/
-/Assets/Starter Assets/
+# TextMesh Pro を除外（Assets/ 以下の任意の階層）
+Assets/**/TextMesh Pro/
+# Starter Assets を除外（Assets/ 以下の任意の階層）
+Assets/**/Starter Assets/
 /ProjectSettings/EditorUserSettings.asset
