@@ -17,4 +17,4 @@ applyTo: "**"
 - すべてのコードはバージョン管理下で共有可能な状態に保つ
 - テスト（NUnit）は必ず `Tests/PlayMode` または `Tests/EditMode` に配置
 - アセット参照は Addressables / Smart Addresser を通して一元管理
-- プラットフォーム依存コードは `#if UNITY_IOS` / `UNITY_ANDROID` で明確化
+- プラットフォーム依存コードは `#if UNITY_IOS` / `#if UNITY_ANDROID` で明確化
