@@ -1,17 +1,8 @@
-# Copilot Instructions (Repository-wide)
+# Copilot Instructions
 
 - Unity: 6000.0 LTS / .NET Standard 2.1
-- Packages: Addressables, Input System, Cinemachine, LitMotion, Smart Addresser, UniTask, UI Effect, VContainer, VRM 1.0
+- Packages: Addressables, Input System, Cinemachine, LitMotion, Smart Addresser, UniTask, UI Effect, VContainer, VRM 1.0, R3
 - Targets: iOS / Android (IL2CPP), Standalone
-
-## Coding standards
-
-- 命名規則:
-  - Types/Namespaces/Properties = PascalCase
-  - Methods = camelCase
-  - Fields (private 含む) = camelCase（先頭アンダースコア禁止）
-  - 必要に応じて `this.` を付け、メンバー参照を明確化
-- ファイル/クラスは単一責務。public API は最小限に
 
 ## Asset naming
 
@@ -28,7 +19,7 @@
 
 ## Unity patterns
 
-- MonoBehaviour の Update 系は最小化。イベント/コルーチン/Job/ECS/UniTask を優先
+- MonoBehaviour の Update 系は最小化。イベント / コルーチン / Job / ECS / UniTask を優先
 - `GetComponent` / `FindObjectOfType` は開始時にキャッシュ。ループ内で呼ばない
 - GC 割当を抑制（StringBuilder / ArrayPool、LINQ はホットパス禁止）
 - 例外はコントロールフローに使わない。失敗は Try パターン / Result 型で返す
@@ -48,10 +39,10 @@
 - R3:
   - 購読は MonoBehaviour のライフサイクルに紐付け、`IDisposable` を必ず Dispose
   - Unity API 呼び出しはメインスレッドへマーシャリング
-  - 入力スパムは `Throttle`/`Debounce` 等で制御し、Subscribe に重い処理を書かない
+  - 入力スパムは `Throttle` / `Debounce` 等で制御し、Subscribe に重い処理を書かない
   - `OnError` は必ずロギングし、無視や握り潰しをしない
 
-## Async Policy
+## Async policy
 
 - **基本は UniTask**：単発の待機・ロード・シーン遷移・アニメ/演出待ち等は `async/await` + UniTask を使用
 - **R3 は要所で**：
