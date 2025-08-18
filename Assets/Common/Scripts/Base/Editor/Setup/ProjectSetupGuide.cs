@@ -45,7 +45,7 @@ namespace TinyShrine.Base.Editor.Setup
 
         public static void AssignDefaultFont()
         {
-            string[] targetDirectories = { "Assets/Scenes", "Assets/Prefabs" };
+            string[] targetDirectories = { "Assets/Common/Scenes", "Assets/Common/Prefabs" };
             string defaultFontPath = "Assets/Common/Fonts/MPLUS2-Medium SDF.asset";
             TmpFontReassignUtility.AssignDefaultFont(targetDirectories, defaultFontPath);
         }

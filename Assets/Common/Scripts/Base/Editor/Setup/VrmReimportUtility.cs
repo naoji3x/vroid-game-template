@@ -1,6 +1,6 @@
 using UnityEditor;
 using UnityEngine;
-using System.Linq;
+using System.IO;
 
 namespace TinyShrine.Base.Editor.Setup
 {
@@ -11,34 +11,69 @@ namespace TinyShrine.Base.Editor.Setup
         /// </summary>
         public static void ReimportAllVrms()
         {
-            string[] vrmGuids = AssetDatabase.FindAssets("t:DefaultAsset")
-                .Where(guid => AssetDatabase.GUIDToAssetPath(guid).EndsWith(".vrm"))
-                .ToArray();
-
-            if (vrmGuids.Length == 0)
+            if (!FindAnyVrm(out string[] paths))
             {
-                Debug.Log("VRMファイルが見つかりませんでした。");
+                EditorUtility.DisplayDialog("VRMの再インポート", "Assets 内に .vrm が見つかりませんでした。", "OK");
                 return;
             }
 
-            Debug.Log($"{vrmGuids.Length}個のVRMファイルの再インポートを開始します...");
-
-            for (int i = 0; i < vrmGuids.Length; i++)
+            try
             {
-                string path = AssetDatabase.GUIDToAssetPath(vrmGuids[i]);
+                int total = paths.Length;
+                for (int i = 0; i < total; i++)
+                {
+                    string p = ToProjectRelative(paths[i]);
+                    EditorUtility.DisplayProgressBar("Reimporting VRM", p, (float)i / total);
 
-                EditorUtility.DisplayProgressBar(
-                    "VRM 再インポート中",
-                    $"処理中: {System.IO.Path.GetFileName(path)}",
-                    (float)i / vrmGuids.Length);
+                    // UniVRM の Importer を再実行（同期・強制）
+                    AssetDatabase.ImportAsset(p,
+                        ImportAssetOptions.ForceUpdate |
+                        ImportAssetOptions.ForceSynchronousImport);
 
-                AssetDatabase.ImportAsset(path, ImportAssetOptions.ForceUpdate);
-                Debug.Log($"再インポート完了: {path}");
+                    // 念のため生成物も最新化（同フォルダに生成される Prefab/Materials など）
+                    // → ImportAssetだけで十分なはずですが、必要に応じて追加の処理を入れられます。
+                }
+
+                AssetDatabase.SaveAssets();
+                EditorUtility.DisplayDialog("完了", $".vrm を {total} 件、再インポートしました。", "OK");
             }
+            finally
+            {
+                EditorUtility.ClearProgressBar();
+            }
+        }
 
-            EditorUtility.ClearProgressBar();
-            AssetDatabase.Refresh();
-            Debug.Log("全てのVRMファイルの再インポートが完了しました。");
+        // --- helpers ---
+        static bool FindAnyVrm(out string[] fullPaths)
+        {
+            // Assets 以下を再帰で走査して *.vrm を収集
+            System.Collections.Generic.List<string> list = new System.Collections.Generic.List<string>();
+            string root = Application.dataPath; // 絶対パス（…/Project/Assets）
+            CollectVrmFiles(root, list);
+            fullPaths = list.ToArray();
+            return fullPaths.Length > 0;
+        }
+
+        static void CollectVrmFiles(string dir, System.Collections.Generic.List<string> list)
+        {
+            // .vrm は .glb 互換ですが拡張子で判定
+            string[] files = Directory.GetFiles(dir, "*.vrm", SearchOption.TopDirectoryOnly);
+            list.AddRange(files);
+
+            string[] dirs = Directory.GetDirectories(dir);
+            foreach (string d in dirs)
+            {
+                // 隠し/パッケージ/Library をスキップ（Assets 内だけ走査）
+                if (Path.GetFileName(d).StartsWith(".")) continue;
+                CollectVrmFiles(d, list);
+            }
+        }
+
+        static string ToProjectRelative(string absolute)
+        {
+            // …/Project/ の手前まで削って "Assets/…" 形式に
+            string proj = Path.GetDirectoryName(Application.dataPath).Replace("\\", "/");
+            return absolute.Replace("\\", "/").Replace(proj + "/", "");
         }
     }
 }
