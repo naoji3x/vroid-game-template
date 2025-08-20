@@ -1,0 +1,52 @@
+name: Release archives on tag
+
+on:
+  push:
+    tags:
+      - '*.*.*-*'   # 例: 1.3.5-6000.0.53f1 のようなタグで起動
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write  # リリース作成・アセットアップロードに必要
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set TAG env
+        run: echo "TAG=${GITHUB_REF_NAME}" >> $GITHUB_ENV
+
+      - name: Make dist dir
+        run: mkdir -p dist
+
+      # --- ソーススナップショット: tar.gz ---
+      - name: Create source .tar.gz via git archive
+        run: |
+          git archive \
+            --format=tar.gz \
+            --prefix="${{ github.event.repository.name }}-${TAG}/" \
+            -o "dist/${{ github.event.repository.name }}-${TAG}.tar.gz" \
+            HEAD
+
+      # --- ソーススナップショット: zip ---
+      - name: Create source .zip via git archive
+        run: |
+          git archive \
+            --format=zip \
+            --prefix="${{ github.event.repository.name }}-${TAG}/" \
+            -o "dist/${{ github.event.repository.name }}-${TAG}.zip" \
+            HEAD
+
+      - name: Create GitHub Release & upload assets
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ env.TAG }}
+          name: ${{ env.TAG }}
+          generate_release_notes: true
+          prerelease: ${{ contains(env.TAG, '-') }}
+          files: |
+            dist/*.tar.gz
+            dist/*.zip

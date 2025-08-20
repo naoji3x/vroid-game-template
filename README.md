@@ -1,6 +1,26 @@
 # vroid-game-template
 
-このプロジェクトは Unity 6000 LTS Universal 3D Template をベースに作成された MIT ライセンスのサンプルです。VRM ファイルおよび外部アセットは、それぞれのライセンス条件に従って使用・配布されています。
+## 💡 動機
+
+このプロジェクトは、VRoidアバターを扱うUnity向けのオープンソース（MITライセンス）テンプレートです。
+
+Unityプロジェクトの初期セットアップには多くのノウハウと時間が必要ですが、[CoderDojo](https://coderdojo.jp/)の活動を通じて、セットアップ作業に苦労するニンジャたちを見て、より簡単に始められる仕組みを作ろうと考えました。
+
+このテンプレートは、Unityを使い始めた誰もが一度は挑戦したい次のようなことを、すぐに実現できるよう設計されています。
+
+- VRoidで作成した自分だけの3DキャラクターをUnity上に表示する
+- キャラクターをキーボードやマウスで自由に操作する
+- 目標地点までキャラクターを歩かせたり走らせたりする
+
+さらに、以下のような時間のかかる作業を自動化・簡素化しています。
+
+- 各種パッケージの導入やTextMesh Proによる日本語表示など、面倒なセットアップを自動化
+- Unity Asset Storeのアセットなど、ライセンス上同梱できない素材も、手順に従って簡単に導入可能
+- ソースコードはMITライセンス、同梱アセットは無料素材のみを使用し、誰でも安心して利用できる
+
+---
+
+## TL;DR
 
 ---
 
@@ -20,27 +40,16 @@
 
 ### 2. VRMファイル
 
-- **ライセンス:** VRMファイルに埋め込まれた利用許諾条件に従う  
-- 作者および条件は VRM ファイルの `meta` 情報を参照。なお、このプロジェクトに含まれるSampleGirl.vrmは、
-  - アバターの利用許可：すべてのユーザー
-  - アバター表現の許可：暴力表現不可、性的表現不可、政治的表現不可、宗教的表現不可、反社会的表現不可
-  - 商用利用：個人・法人の商用利用OK
-  - 再配布：OK
-  - 改変：改変したモデルの再配布OK
+- **ライセンス:** 各VRMファイルに埋め込まれた利用許諾条件に従ってください。
+- 作者や利用条件は、VRMファイルの `meta` 情報から確認できます。
+- 本プロジェクト同梱の `SampleGirl.vrm` については以下の通りです：
+  - 利用許可：すべてのユーザー
+  - 表現の制限：暴力・性的・政治的・宗教的・反社会的表現は禁止
+  - 商用利用：個人・法人ともに可能
+  - 再配布：可能
+  - 改変および改変モデルの再配布：可能
   - クレジット表記：不要
-
-### 3. アニメーション（Rokoko – 16 Free Walk & Run Cycle Animations）
-
-- **提供元:** [Rokoko](https://www.rokoko.com/resources/rokoko-mocap-16-free-walk-and-run-cycle-animations)
-- **利用条件:** Rokoko公式配布のフリーモーションとして、商用・非商用プロジェクトで利用可能  
-- **注意:** アセットを単体で再配布することは禁止。プロジェクトの一部としてのみ配布
-
-### 4. Mixamo由来アニメーション（含まれる場合）
-
-- **提供元:** [Mixamo (Adobe)](https://www.mixamo.com/)
-- **利用条件:** 商用・非商用利用可。改変可  
-- **禁止事項:** アセットを単体で配布することは禁止（プロジェクトへの組み込み配布は可）
-- **クレジット:** "Contains animation data from Mixamo"
+- その他のVRMファイルを利用する場合は、それぞれのファイルの利用条件を必ずご確認ください。
 
 ---
 
@@ -68,13 +77,16 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-※ VRM やアニメーション等のアセットは MIT ライセンスには含まれません。各アセットのライセンス条件を遵守してください。
-
 ---
 
 ## 🙏 Credits
 
 - Unity 6000 LTS Universal 3D Template
 - UniVRM
-- Rokoko – 16 Free Walk & Run Cycle Animations
-- Mixamo (Adobe)
+- LitMotion
+- Smart Addresser
+- UniTask
+- UI Effect
+- VContainer
+- VRM 1.0
+- R3
