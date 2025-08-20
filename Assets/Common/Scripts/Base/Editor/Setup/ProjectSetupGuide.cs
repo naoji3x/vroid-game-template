@@ -107,6 +107,11 @@ namespace TinyShrine.Base.Editor.Setup
             // スクロール可能なエリア
             scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition);
 
+            DrawSetupStep("1", "VRM の再インポート",
+                "プロジェクト内の全VRMファイルを再インポートしてVRoidの表示を修正します。",
+                "Reimport Vrms",
+                () => ProjectSetupGuide.ReimportVrms());
+
             DrawSetupStep("1", "Starter Assets のダウンロード",
                 "Starter Assets: Character Controllers | URP を Asset Store からダウンロードしてインストールしてください。",
                 "Download Starter Assets: Character Controllers | URP",
@@ -122,10 +127,6 @@ namespace TinyShrine.Base.Editor.Setup
                 "Assign Default Font (Null Only) in Scenes+Prefabs",
                 () => ProjectSetupGuide.AssignDefaultFont());
 
-            DrawSetupStep("4", "VRM の再インポート",
-                "VRoidがうまく表示されない/エラーになる場合に実行してください。\nプロジェクト内の全VRMファイルを再インポートします。",
-                "Reimport Vrms",
-                () => ProjectSetupGuide.ReimportVrms());
 
             EditorGUILayout.EndScrollView();
 

@@ -96,3 +96,15 @@ Assets/**/Starter Assets/
 
 # Androidの署名ファイル
 *.keystore
+
+# --- ベイク結果は無視（軽量化 & 差分ノイズ防止）---
+Assets/**/LightingData.asset
+Assets/**/LightingData.asset.meta
+Assets/**/Lightmap-*.exr
+Assets/**/Lightmap-*.exr.meta
+Assets/**/Lightmap-*.png
+Assets/**/Lightmap-*.png.meta
+Assets/**/ReflectionProbe-*.exr
+Assets/**/ReflectionProbe-*.exr.meta
+Assets/**/LightProbes.asset
+Assets/**/LightProbes.asset.meta
