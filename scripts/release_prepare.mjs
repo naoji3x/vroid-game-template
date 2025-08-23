@@ -53,7 +53,7 @@ async function main() {
       'commit',
       '-m',
       `chore(release): ${tag}`,
-      '-F',
+      '-m',
       'dist/RELEASE_BODY.md',
     ]);
 
