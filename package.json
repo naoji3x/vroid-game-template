@@ -19,7 +19,8 @@
     "lint:md": "markdownlint CHANGELOG.md README.md",
     "lint:md:fix": "markdownlint --fix CHANGELOG.md README.md",
     "release:extract": "node scripts/changelog_extract.mjs",
-    "release:commit-tag": "node scripts/release_commit_and_tag.mjs",
+    "release:prepare": "node scripts/release_prepare.mjs",
+    "release:tag": "node scripts/release_tag.mjs",
     "test:dotnet": "dotnet test --nologo vroid-game-template.sln",
     "build:dotnet": "dotnet build --nologo -c Release vroid-game-template.sln"
   },

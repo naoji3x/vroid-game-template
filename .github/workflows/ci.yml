@@ -1,0 +1,25 @@
+name: CI
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: ['release/*'] # 任意：releaseブランチへのpush時にもチェック
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - uses: actions/setup-node@v4
+        with: { node-version: '22' }
+      - name: Install dev tools
+        run: npm ci
+      - name: Lint Markdown (with custom CHANGELOG rules)
+        run: npm run lint:md
+      - uses: actions/setup-dotnet@v4
+        with: { dotnet-version: '8.0.x' }
+      - name: Build & Test (.NET)
+        run: |
+          npm run build:dotnet
+          npm run test:dotnet

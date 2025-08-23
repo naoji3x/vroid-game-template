@@ -2,51 +2,58 @@ name: Release archives on tag
 
 on:
   push:
-    tags:
-      - '*.*.*-*'   # 例: 1.3.5-6000.0.53f1 のようなタグで起動
+    tags: ['v*'] # 例: v1.4.0
 
 jobs:
   build-and-release:
     runs-on: ubuntu-latest
     permissions:
-      contents: write  # リリース作成・アセットアップロードに必要
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+      contents: write
 
-      - name: Set TAG env
-        run: echo "TAG=${GITHUB_REF_NAME}" >> $GITHUB_ENV
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+
+      - name: Ensure tag commit is on main (safety)
+        run: |
+          git fetch --unshallow || true
+          git fetch origin main
+          git branch -r --contains $GITHUB_SHA | grep -q 'origin/main' || \
+            (echo "::error::Tag commit is not on main. Abort." && exit 1)
+
+      - uses: actions/setup-node@v4
+        with: { node-version: '22' }
+
+      - name: Extract Unity / App versions
+        run: node scripts/extract_versions.mjs >> $GITHUB_ENV
+
+      - name: Extract release notes from CHANGELOG.md
+        run: node scripts/changelog_extract.mjs ${{ github.ref_name }}
 
       - name: Make dist dir
         run: mkdir -p dist
 
-      # --- ソーススナップショット: tar.gz ---
-      - name: Create source .tar.gz via git archive
+      - name: Create source .tar.gz
         run: |
-          git archive \
-            --format=tar.gz \
-            --prefix="${{ github.event.repository.name }}-${TAG}/" \
-            -o "dist/${{ github.event.repository.name }}-${TAG}.tar.gz" \
+          git archive --format=tar.gz \
+            --prefix="${{ github.event.repository.name }}-${{ github.ref_name }}/" \
+            -o "dist/${{ github.event.repository.name }}-${{ github.ref_name }}-Unity${{ env.UNITY_VERSION }}-App${{ env.APP_VERSION }}.tar.gz" \
             HEAD
-
-      # --- ソーススナップショット: zip ---
-      - name: Create source .zip via git archive
+      - name: Create source .zip
         run: |
-          git archive \
-            --format=zip \
-            --prefix="${{ github.event.repository.name }}-${TAG}/" \
-            -o "dist/${{ github.event.repository.name }}-${TAG}.zip" \
+          git archive --format=zip \
+            --prefix="${{ github.event.repository.name }}-${{ github.ref_name }}/" \
+            -o "dist/${{ github.event.repository.name }}-${{ github.ref_name }}-Unity${{ env.UNITY_VERSION }}-App${{ env.APP_VERSION }}.zip" \
             HEAD
 
       - name: Create GitHub Release & upload assets
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ env.TAG }}
-          name: ${{ env.TAG }}
-          generate_release_notes: true
-          prerelease: ${{ contains(env.TAG, '-') }}
+          tag_name: ${{ github.ref_name }}
+          name: ${{ github.ref_name }} (Unity ${{ env.UNITY_VERSION }}, App ${{ env.APP_VERSION }})
+          body_path: dist/RELEASE_BODY.md
+          prerelease: false
+          make_latest: true
           files: |
             dist/*.tar.gz
             dist/*.zip

@@ -83,9 +83,6 @@ async function checkChangelogFormat() {
   console.log('✅ CHANGELOG.md書式チェック: OK');
 }
 
-checkChangelogFormat().catch((error) => {
-  // eslint-disable-next-line no-console
-  console.error(error.message);
-  // エラーを再スローしてプロセスを異常終了させる
-  throw error;
+checkChangelogFormat().catch(() => {
+  process.exitCode = 1;
 });
