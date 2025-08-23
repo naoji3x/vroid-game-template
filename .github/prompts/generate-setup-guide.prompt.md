@@ -1,6 +1,6 @@
 ---
-mode: "agent"
-description: "プロジェクトのSetup Guideスクリプトを生成する。"
+mode: 'agent'
+description: 'プロジェクトのSetup Guideスクリプトを生成する。'
 ---
 
 あなたはこのリポジトリの「セットアップ」のスクリプトを作成する、熟練のプログラマです。以下を順番に実行して、スクリプトを作成して下さい。

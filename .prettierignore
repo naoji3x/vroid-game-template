@@ -1,0 +1,24 @@
+# Directories
+node_modules/
+Library/
+Temp/
+Build/
+Logs/
+Builds/
+.git/
+ProjectSettings/
+
+# Unity specific
+*.meta
+*.asset
+*.prefab
+*.unity
+*.mat
+
+# Build outputs
+dist/
+build/
+
+# OS
+.DS_Store
+Thumbs.db

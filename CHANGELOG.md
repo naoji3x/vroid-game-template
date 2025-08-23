@@ -1,0 +1,25 @@
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+The format is based on Keep a Changelog, and this project adheres to Semantic Versioning.
+
+## [Unreleased]
+
+- プロジェクト初期化
+- Unity 6000.0 LTS / .NET Standard 2.1 対応
+- Addressables, Input System, Cinemachine, LitMotion, Smart Addresser, UniTask, UI Effect,
+  VContainer, VRM 1.0, R3 パッケージ導入
+- テンプレート構成（Assets/Common, Scripts, Scenes, Settings など）
+- Input System: `InputSystem_Actions.inputactions` 追加
+- サンプルシーン・サンプルスクリプト追加
+- エディタ拡張（Common/Editor/Base/Setup/TmpFontReassignUtility.cs など）
+- README, DEVLOG, CHANGELOG、README_ProjectSettings_Checklist、ライセンスファイル追加
+
+---
+
+> このファイルはプロジェクトの各リリースごとに更新してください。
+
+## [v0.1.0] - 2025-08-24
+
+- 初期リリース

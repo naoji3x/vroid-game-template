@@ -1,5 +1,12 @@
 # Developer Log
 
+## TODO
+
+- [x] CHANGELOG.mdの作成。
+- [ ] バージョンタグをv*.*.\*に変更。
+- [ ] リリースのタイトルとアセット名にUnityのバージョンを記載。
+- [ ] Unityに設定したバージョン情報からv*.*.\*を取得。
+
 ## TextMeshProの設定
 
 - [Unityのフォント追加方法・TextMeshProを日本語で使う方法](https://yurinchi2525.com/2023011howtoaddtextmeshpro/)
@@ -25,9 +32,9 @@ openupm add com.github-glitchenzo.nugetforunity # NuGet for Unityのインスト
 
 ```json
 {
-    "dependencies": {
-        "com.annulusgames.lit-motion": "https://github.com/annulusgames/LitMotion.git?path=src/LitMotion/Assets/LitMotion"
-    }
+  "dependencies": {
+    "com.annulusgames.lit-motion": "https://github.com/annulusgames/LitMotion.git?path=src/LitMotion/Assets/LitMotion"
+  }
 }
 ```
 
@@ -35,9 +42,9 @@ openupm add com.github-glitchenzo.nugetforunity # NuGet for Unityのインスト
 
 ```json
 {
-    "dependencies": {
-      "jp.co.cyberagent.smartaddresser": "https://github.com/CyberAgentGameEntertainment/SmartAddresser.git?path=/Assets/SmartAddresser"
-    }
+  "dependencies": {
+    "jp.co.cyberagent.smartaddresser": "https://github.com/CyberAgentGameEntertainment/SmartAddresser.git?path=/Assets/SmartAddresser"
+  }
 }
 ```
 
