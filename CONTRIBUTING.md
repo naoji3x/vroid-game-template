@@ -1,18 +1,20 @@
 # CONTRIBUTING.md
 
-準備（releaseブランチで）
+## リリースの手順
 
 ```bash
+# 1) リリース準備（ローカル）
 git switch -c release/v1.4.0
-# ← CHANGELOG.md を手で編集（Unreleased→[v1.4.0] - YYYY-MM-DD）
-npm run release:prepare -- v1.4.0   # コミットだけ作る（タグは作らない）
-git push -u origin HEAD             # PR を作成（release/v1.4.0 → main）
-```
+# CHANGELOG.md を手で編集（Unreleased→[v1.4.0] - YYYY-MM-DD）
+npm run release:prepare -- v1.4.0   # ← コミットだけ作る（タグは切らない）
 
-確定（PRがmainにマージされたら）
+# 2) release ブランチを **明示的に** push（HEAD を使わない）
+git push -u origin release/v1.4.0   # ← upstream 設定も同時に
 
-```bash
+# 3) PR が自動で作成される（release/v1.4.0 → main）→ マージ
+
+# 4) main に切り替えてタグを作成＆push（Actions 起動）
 git switch main
-git pull --ff-only
-npm run release:tag -- v1.4.0       # 注釈付きタグ作成＆push → ActionsがRelease生成
+git pull --ff-only                  # fast-forward マージしか許さない
+npm run release:tag -- v1.4.0       # ← タグ作成＆ push（スクリプトが実施）
 ```
