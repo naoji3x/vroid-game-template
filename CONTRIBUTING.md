@@ -11,7 +11,7 @@ npm run release:prepare -- v1.4.0   # ← コミットだけ作る（タグは�
 # 2) release ブランチを **明示的に** push（HEAD を使わない）
 git push -u origin release/v1.4.0   # ← upstream 設定も同時に
 
-# 3) PR が自動で作成される（release/v1.4.0 → main）→ マージ
+# 3) PR が作成される（release/v1.4.0 → main）→ GitHub上でマージ
 
 # 4) main に切り替えてタグを作成＆push（Actions 起動）
 git switch main
