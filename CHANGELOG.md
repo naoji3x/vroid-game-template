@@ -6,29 +6,13 @@ The format is based on Keep a Changelog, and this project adheres to Semantic Ve
 
 ## [Unreleased]
 
-### Added
-
-### Changed
-
-### Fixed
-
-### Removed
-
-### Deprecated
-
-### Security
-
-### Build
-
-### Docs
-
 ---
 
 > このファイルはプロジェクトの各リリースごとに更新してください。
 
-## [v0.1.0] - 2025-08-24
+## [v0.1.1] - 2025-08-24
 
-### Added v0.1.0
+### Added v0.1.1
 
 αリリース
 
