@@ -6,6 +6,22 @@ The format is based on Keep a Changelog, and this project adheres to Semantic Ve
 
 ## [Unreleased]
 
+### Added
+
+### Changed
+
+### Fixed
+
+### Removed
+
+### Deprecated
+
+### Security
+
+### Build
+
+### Docs
+
 > このファイルはプロジェクトの各リリースごとに更新してください。
 
 ## [v0.1.1] - 2025-08-24
@@ -31,3 +47,9 @@ The format is based on Keep a Changelog, and this project adheres to Semantic Ve
 ### Added v0.1.2
 
 - Appバージョンチェックの追加、archive名の変更
+
+## [v0.1.3] - 2025-08-24
+
+### Fixed v0.1.3
+
+- 初期設定アセットのディレクトリの修正、セットアップガイドの表示フラグの修正

@@ -8,8 +8,8 @@ git switch -c release/v1.4.0
 # CHANGELOG.md を手で編集（Unreleased→[v1.4.0] - YYYY-MM-DD）
 npm run release:prepare -- v1.4.0   # ← コミットだけ作る（タグは切らない）
 
-# 2) release ブランチを **明示的に** push（HEAD を使わない）
-git push -u origin release/v1.4.0   # ← upstream 設定も同時に
+# 2) release ブランチを push
+git push -u origin HEAD
 
 # 3) PR が作成される（release/v1.4.0 → main）→ GitHub上でマージ
 

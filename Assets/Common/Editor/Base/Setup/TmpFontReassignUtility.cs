@@ -2,8 +2,6 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
-using System.Linq;
-using System.Collections.Generic;
 
 namespace TinyShrine.Base.Editor.Setup
 {

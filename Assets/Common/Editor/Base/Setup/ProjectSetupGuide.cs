@@ -1,36 +1,64 @@
 using UnityEditor;
 using UnityEngine;
-using System.Linq;
+using System.IO;
 
 namespace TinyShrine.Base.Editor.Setup
 {
     [InitializeOnLoad]
     public static class ProjectSetupGuide
     {
+        private static readonly string GuideShownFilePath = "ProjectSettings/ProjectSetupGuide.shown";
+
         static ProjectSetupGuide()
         {
-            // 既にStarterAssetsとTextMeshProがインストール済みなら表示しない
-            if (IsStarterAssetsInstalled() && IsTextMeshProInitialized())
-                return;
-
             // 初回のみ表示（1フレーム待ってから表示）
-            if (!EditorPrefs.GetBool("ProjectSetupGuide_Shown", false))
+            if (!IsGuideShown())
             {
                 EditorApplication.update += ShowGuideDelayed;
             }
+        }
+
+        private static bool IsGuideShown()
+        {
+            return File.Exists(GuideShownFilePath);
+        }
+
+        private static void SetGuideShown()
+        {
+            // プロジェクト単位での設定保存
+            string directory = Path.GetDirectoryName(GuideShownFilePath);
+            if (!Directory.Exists(directory))
+            {
+                Directory.CreateDirectory(directory);
+            }
+            File.WriteAllText(GuideShownFilePath, System.DateTime.Now.ToString());
         }
 
         private static void ShowGuideDelayed()
         {
             EditorApplication.update -= ShowGuideDelayed;
             ShowGuide();
-            EditorPrefs.SetBool("ProjectSetupGuide_Shown", true);
+            SetGuideShown();
         }
 
         [MenuItem("Tools/Project/1. Show Setup Guide")]
         public static void ShowSetupGuide()
         {
             ShowGuide();
+        }
+
+        [MenuItem("Tools/Project/Reset Setup Guide State")]
+        public static void ResetSetupGuideState()
+        {
+            if (File.Exists(GuideShownFilePath))
+            {
+                File.Delete(GuideShownFilePath);
+                Debug.Log("Setup Guide state has been reset. The guide will show again on next project load.");
+            }
+            else
+            {
+                Debug.Log("Setup Guide state was already reset.");
+            }
         }
 
         public static void DownloadStarterAssets()
@@ -45,32 +73,14 @@ namespace TinyShrine.Base.Editor.Setup
 
         public static void AssignDefaultFont()
         {
-            string[] targetDirectories = { "Assets/Common/Scenes", "Assets/Common/Prefabs" };
-            string defaultFontPath = "Assets/Common/Fonts/MPLUS2-Medium SDF.asset";
+            string[] targetDirectories = { "Assets/Common/Sample/Scenes", "Assets/Common/Sample/Prefabs", "Assets/Common/Runtime/Prefabs" };
+            string defaultFontPath = "Assets/Common/Runtime/Fonts/MPLUS2-Medium SDF.asset";
             TmpFontReassignUtility.AssignDefaultFont(targetDirectories, defaultFontPath);
         }
 
         public static void ReimportVrms()
         {
             VrmReimportUtility.ReimportAllVrms();
-        }
-
-        // Starter Assets: Character Controllers | URP のインストール判定
-        private static bool IsStarterAssetsInstalled()
-        {
-            // 代表的なスクリプトの存在で判定
-            string[] guids = AssetDatabase.FindAssets("ThirdPersonController t:Script");
-            return guids.Select(AssetDatabase.GUIDToAssetPath)
-                .Any(path => path.Contains("Starter Assets"));
-        }
-
-        // TextMesh Proの初期化判定
-        private static bool IsTextMeshProInitialized()
-        {
-            // TMP Settingsアセットが存在すれば初期化済み
-            string[] guids = AssetDatabase.FindAssets("TMP Settings t:ScriptableObject");
-            return guids.Select(AssetDatabase.GUIDToAssetPath)
-                .Any(path => path.Contains("TextMesh Pro"));
         }
 
         private static void ShowGuide()
@@ -107,11 +117,6 @@ namespace TinyShrine.Base.Editor.Setup
             // スクロール可能なエリア
             scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition);
 
-            DrawSetupStep("1", "VRM の再インポート",
-                "プロジェクト内の全VRMファイルを再インポートしてVRoidの表示を修正します。",
-                "Reimport Vrms",
-                () => ProjectSetupGuide.ReimportVrms());
-
             DrawSetupStep("1", "Starter Assets のダウンロード",
                 "Starter Assets: Character Controllers | URP を Asset Store からダウンロードしてインストールしてください。",
                 "Download Starter Assets: Character Controllers | URP",
@@ -127,6 +132,10 @@ namespace TinyShrine.Base.Editor.Setup
                 "Assign Default Font (Null Only) in Scenes+Prefabs",
                 () => ProjectSetupGuide.AssignDefaultFont());
 
+            DrawSetupStep("4", "VRM の再インポート",
+                "プロジェクト内の全VRMファイルを再インポートしてVRoidの表示を修正します。\n※VRoidがオレンジになる場合は再度実行してください。",
+                "Reimport Vrms",
+                () => ProjectSetupGuide.ReimportVrms());
 
             EditorGUILayout.EndScrollView();
 
