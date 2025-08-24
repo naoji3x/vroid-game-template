@@ -1,4 +1,3 @@
-// Assets/Editor/BakeBeforeBuild.cs
 using UnityEditor;
 using UnityEditor.Build;
 using UnityEditor.Build.Reporting;

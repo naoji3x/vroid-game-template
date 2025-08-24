@@ -8,6 +8,8 @@ The format is based on Keep a Changelog, and this project adheres to Semantic Ve
 
 ### Added
 
+- Recorder packageの追加
+
 ### Changed
 
 ### Fixed
@@ -21,6 +23,8 @@ The format is based on Keep a Changelog, and this project adheres to Semantic Ve
 ### Build
 
 ### Docs
+
+- サンプルのスクリーンショットとTL;DRの文章の追加
 
 > このファイルはプロジェクトの各リリースごとに更新してください。
 
