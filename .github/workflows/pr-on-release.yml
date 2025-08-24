@@ -1,0 +1,75 @@
+name: Open PR on release branch push
+
+on:
+  push:
+    branches:
+      - 'release/*' # 例: release/v1.4.0
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  open-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+
+      - uses: actions/setup-node@v4
+        with: { node-version: '22' }
+
+      # ブランチ名からタグ（vX.Y.Z）を抽出
+      - name: Derive tag from branch
+        id: derive
+        run: |
+          BR="${GITHUB_REF_NAME}"              # 例: release/v1.4.0
+          TAG="${BR#release/}"                 # -> v1.4.0 想定
+          echo "TAG=${TAG}" >> $GITHUB_ENV
+          echo "tag=${TAG}" >> $GITHUB_OUTPUT
+
+      # CHANGELOG から該当節を抽出して PR 本文に使う（手書きの内容をそのまま活用）
+      - name: Extract release notes
+        run: node scripts/changelog_extract.mjs ${{ env.TAG }}
+
+      # 既存PRが無ければ作成（idempotent）
+      - name: Open or update PR
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const tag = process.env.TAG;                  // 例: v1.4.0
+            const head = `release/${tag}`;
+            const base = "main";
+            const { data: prs } = await github.rest.pulls.list({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: "open",
+              head: `${context.repo.owner}:${head}`,
+              base
+            });
+
+            const fs = require('fs');
+            let body = "Release " + tag;
+            try { body = fs.readFileSync("dist/RELEASE_BODY.md","utf8"); } catch {}
+
+            if (prs.length) {
+              // 既存PRの本文を更新（任意）
+              await github.rest.pulls.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: prs[0].number,
+                title: `Release ${tag}`,
+                body
+              });
+              core.info(`PR #${prs[0].number} already exists. Updated title/body.`);
+            } else {
+              const { data: pr } = await github.rest.pulls.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: `Release ${tag}`,
+                head,
+                base,
+                body
+              });
+              core.info(`PR #${pr.number} created.`);
+            }
