@@ -8,8 +8,6 @@ The format is based on Keep a Changelog, and this project adheres to Semantic Ve
 
 ### Added
 
-- Recorder packageの追加
-
 ### Changed
 
 ### Fixed
@@ -23,8 +21,6 @@ The format is based on Keep a Changelog, and this project adheres to Semantic Ve
 ### Build
 
 ### Docs
-
-- サンプルのスクリーンショットとTL;DRの文章の追加
 
 > このファイルはプロジェクトの各リリースごとに更新してください。
 
@@ -57,3 +53,13 @@ The format is based on Keep a Changelog, and this project adheres to Semantic Ve
 ### Fixed v0.1.3
 
 - 初期設定アセットのディレクトリの修正、セットアップガイドの表示フラグの修正
+
+## [v0.1.4] - 2025-08-24
+
+### Added v0.1.4
+
+- Recorder packageの追加
+
+### Docs v0.1.4
+
+- サンプルのスクリーンショットとTL;DRの文章の追加
