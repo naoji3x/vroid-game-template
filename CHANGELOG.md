@@ -6,10 +6,6 @@ The format is based on Keep a Changelog, and this project adheres to Semantic Ve
 
 ## [Unreleased]
 
-### Added
-
-- Appバージョンチェックの追加、archive名の変更
-
 > このファイルはプロジェクトの各リリースごとに更新してください。
 
 ## [v0.1.1] - 2025-08-24
@@ -31,3 +27,7 @@ The format is based on Keep a Changelog, and this project adheres to Semantic Ve
 - プルリクエストの自動生成を追加
 
 ## [v0.1.2] - 2025-08-24
+
+### Added v0.1.2
+
+- Appバージョンチェックの追加、archive名の変更
