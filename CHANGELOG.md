@@ -26,4 +26,4 @@ The format is based on Keep a Changelog, and this project adheres to Semantic Ve
 - エディタ拡張（Common/Editor/Base/Setup/TmpFontReassignUtility.cs など）
 - README, DEVLOG, CHANGELOG、README_ProjectSettings_Checklist、ライセンスファイル追加
 - nodeを追加して、CHANGELOGの自動更新やリリースタグ付けをスクリプト化
-- プルリクエストのフローを修正
+- プルリクエストの自動生成を追加
