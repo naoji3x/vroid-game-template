@@ -93,6 +93,8 @@ Assets/**/TextMesh Pro/
 # Starter Assets を除外（Assets/ 以下の任意の階層）
 Assets/**/Starter Assets/
 /ProjectSettings/EditorUserSettings.asset
+# Setup Guide のプロジェクト固有状態ファイル
+/ProjectSettings/ProjectSetupGuide.shown
 
 # Androidの署名ファイル
 *.keystore
