@@ -3,9 +3,9 @@
 ## TODO
 
 - [x] CHANGELOG.mdの作成。
-- [ ] バージョンタグをv*.*.\*に変更。
-- [ ] リリースのタイトルとアセット名にUnityのバージョンを記載。
-- [ ] Unityに設定したバージョン情報からv*.*.\*を取得。
+- [x] バージョンタグをv*.*.\*に変更。
+- [x] リリースのタイトルとアセット名にUnityのバージョンを記載。
+- [x] Unityに設定したバージョン情報からv*.*.\*を取得。
 
 ## TextMeshProの設定
 
@@ -81,3 +81,14 @@ UniVRMをインストール。インストールはgithubから。バージョ�
   }
 }
 ```
+
+## GitHub ActionsでPR生成が通らない場合の対処
+
+リポジトリ（または Organization）の設定を見直します。
+
+1. Settings → Actions → General
+2. Workflow permissions を Read and write permissions に変更
+3. その下にある “Allow GitHub Actions to create and approve pull requests” を ON にする
+   （このトグルが出ない場合は Org 管理側で制限されている可能性があります）
+
+これで GITHUB_TOKEN のまま actions/github-script で PR 作成が通ります。

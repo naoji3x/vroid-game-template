@@ -6,7 +6,9 @@ The format is based on Keep a Changelog, and this project adheres to Semantic Ve
 
 ## [Unreleased]
 
----
+### Added
+
+- Appバージョンチェックの追加、archive名の変更
 
 > このファイルはプロジェクトの各リリースごとに更新してください。
 
@@ -27,3 +29,5 @@ The format is based on Keep a Changelog, and this project adheres to Semantic Ve
 - README, DEVLOG, CHANGELOG、README_ProjectSettings_Checklist、ライセンスファイル追加
 - nodeを追加して、CHANGELOGの自動更新やリリースタグ付けをスクリプト化
 - プルリクエストの自動生成を追加
+
+## [v0.1.2] - 2025-08-24

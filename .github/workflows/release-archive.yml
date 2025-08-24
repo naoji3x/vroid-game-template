@@ -37,20 +37,20 @@ jobs:
         run: |
           git archive --format=tar.gz \
             --prefix="${{ github.event.repository.name }}-${{ github.ref_name }}/" \
-            -o "dist/${{ github.event.repository.name }}-${{ github.ref_name }}-Unity${{ env.UNITY_VERSION }}-App${{ env.APP_VERSION }}.tar.gz" \
+            -o "dist/${{ github.event.repository.name }}-${{ github.ref_name }}-Unity${{ env.UNITY_VERSION }}.tar.gz" \
             HEAD
       - name: Create source .zip
         run: |
           git archive --format=zip \
             --prefix="${{ github.event.repository.name }}-${{ github.ref_name }}/" \
-            -o "dist/${{ github.event.repository.name }}-${{ github.ref_name }}-Unity${{ env.UNITY_VERSION }}-App${{ env.APP_VERSION }}.zip" \
+            -o "dist/${{ github.event.repository.name }}-${{ github.ref_name }}-Unity${{ env.UNITY_VERSION }}.zip" \
             HEAD
 
       - name: Create GitHub Release & upload assets
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ github.ref_name }}
-          name: ${{ github.ref_name }} (Unity ${{ env.UNITY_VERSION }}, App ${{ env.APP_VERSION }})
+          name: ${{ github.ref_name }} (Unity ${{ env.UNITY_VERSION }})
           body_path: dist/RELEASE_BODY.md
           prerelease: false
           make_latest: true

@@ -1,6 +1,6 @@
 import { spawn } from 'node:child_process';
 import { constants } from 'node:fs';
-import { access } from 'node:fs/promises';
+import { access, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 
 function runCommand(cmd, args) {
@@ -31,6 +31,16 @@ async function fileExists(pathLike) {
   }
 }
 
+async function readText(filePath) {
+  return readFile(resolve(filePath), 'utf8');
+}
+
+async function getAppVersion() {
+  const yamlContent = await readText('ProjectSettings/ProjectSettings.asset');
+  const versionMatch = yamlContent.match(/^\s*bundleVersion:\s*"?([^\r\n"]+)"?\s*$/m);
+  return versionMatch ? versionMatch[1].trim() : null;
+}
+
 async function main() {
   const tag = process.env.TAG || process.argv[2];
   if (!tag) {
@@ -42,20 +52,38 @@ async function main() {
   }
 
   try {
+    // Unity アプリバージョンと指定されたタグの整合性チェック
+    const appVersion = await getAppVersion();
+    if (!appVersion) {
+      throw new Error('bundleVersion (PlayerSettings → Version) が見つかりません');
+    }
+
+    // タグからバージョン部分を抽出 (v0.1.0 → 0.1.0)
+    const tagVersion = tag.startsWith('v') ? tag.slice(1) : tag;
+    if (appVersion !== tagVersion) {
+      // eslint-disable-next-line no-console
+      console.error(`バージョン不一致:`);
+      // eslint-disable-next-line no-console
+      console.error(`  Unity アプリバージョン: ${appVersion}`);
+      // eslint-disable-next-line no-console
+      console.error(`  指定されたタグ: ${tag} (${tagVersion})`);
+      throw new Error('Unity アプリバージョンとタグバージョンが一致しません');
+    }
+
+    // eslint-disable-next-line no-console
+    console.log(`バージョン確認: Unity アプリ ${appVersion} = タグ ${tag} ✓`);
+
     await runCommand(process.execPath, [resolve('scripts/changelog_extract.mjs'), tag]);
 
     if (!(await fileExists('dist/RELEASE_BODY.md'))) {
       throw new Error('dist/RELEASE_BODY.md がありません。抽出に失敗しています。');
     }
 
-    await runCommand('git', ['add', 'CHANGELOG.md']);
-    await runCommand('git', [
-      'commit',
-      '-m',
-      `chore(release): ${tag}`,
-      '-m',
-      'dist/RELEASE_BODY.md',
-    ]);
+    await runCommand('git', ['add', 'CHANGELOG.md', 'ProjectSettings/ProjectSettings.asset']);
+    const releaseBodyRaw = await readFile('dist/RELEASE_BODY.md', 'utf8');
+    const releaseBody = releaseBodyRaw.trim();
+    // -m と -F を同時指定できないため、タイトルと本文を -m 2 回で渡す
+    await runCommand('git', ['commit', '-m', `chore(release): ${tag}`, '-m', releaseBody]);
 
     // eslint-disable-next-line no-console
     console.log(`Prepared release commit for ${tag}.`);
