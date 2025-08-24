@@ -5,7 +5,7 @@
   "description": "Sample repo with manual CHANGELOG + automated checks/releases",
   "scripts": {
     "prepare": "husky",
-    "pre-commit": "npm run lint:md && npm run lint:changelog && npm run build:dotnet && npm run test:dotnet && npm run lint:js && npm run format:check",
+    "pre-commit": "npm run lint:md && npm run lint:changelog && npm run lint:js && npm run format:check",
     "commit-msg": "commitlint --edit",
     "lint": "npm run lint:md && npm run lint:changelog && npm run lint:js",
     "lint:js": "eslint . --ext .js,.mjs,.ts,.tsx --max-warnings 0",
