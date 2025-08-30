@@ -14,7 +14,11 @@ pre-commit:
     lint-changelog:
       files: git diff --cached --name-only
       glob: 'CHANGELOG.md'
-      run: npx markdownlint --config .markdownlint-changelog.json {files}
+      run: |
+        if [ -n "{files}" ]; then
+          npx markdownlint --config .markdownlint-changelog.json {files}
+          node scripts/check-changelog-format.mjs
+        fi
 
     format-js:
       glob: '*.{js,mjs,ts,tsx,json}'

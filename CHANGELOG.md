@@ -8,7 +8,12 @@ The format is based on Keep a Changelog, and this project adheres to Semantic Ve
 
 ### Added
 
+- C#のフォーマッターの追加
+- C#のリンターの追加
+
 ### Changed
+
+- ProjectSetupGuideのボタンを日本語に変更
 
 ### Fixed
 
@@ -21,6 +26,10 @@ The format is based on Keep a Changelog, and this project adheres to Semantic Ve
 ### Build
 
 ### Docs
+
+- CONTRIBUTING.mdの追加
+  - 開発環境に関する情報を追加(git, dotnet, nodeのインストールが必須であることを明記)
+  - commitlintについての補足説明
 
 > このファイルはプロジェクトの各リリースごとに更新してください。
 
