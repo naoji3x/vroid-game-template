@@ -1,0 +1,31 @@
+# Git hooks for development workflow
+pre-commit:
+  parallel: true
+  commands:
+    format-markdown:
+      glob: '*.md'
+      run: npx prettier --write {staged_files}
+      stage_fixed: true
+
+    lint-markdown:
+      glob: '*.md'
+      run: npx markdownlint {staged_files}
+
+    lint-changelog:
+      files: git diff --cached --name-only
+      glob: 'CHANGELOG.md'
+      run: npx markdownlint --config .markdownlint-changelog.json {files}
+
+    format-js:
+      glob: '*.{js,mjs,ts,tsx,json}'
+      run: npx prettier --write {staged_files}
+      stage_fixed: true
+
+    lint-js:
+      glob: '*.{js,mjs,ts,tsx}'
+      run: npx eslint {staged_files} --max-warnings 0
+
+commit-msg:
+  commands:
+    commitlint:
+      run: npx commitlint --edit $1
