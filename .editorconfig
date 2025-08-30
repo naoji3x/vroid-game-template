@@ -1,11 +1,130 @@
 root = true
 
-[*.cs]
-dotnet_diagnostic.IDE0130.severity = none
-indent_style = space
-indent_size = 4
+# All files
+[*]
+charset = utf-8
+end_of_line = lf
 insert_final_newline = true
-csharp_new_line_before_members = true
-csharp_space_after_keywords_in_control_flow_statements = true
-csharp_space_between_method_call_parameter_list_parentheses = false
-csharp_space_between_method_declaration_parameter_list_parentheses = false
+trim_trailing_whitespace = true
+
+# Max line length
+max_line_length = 120
+
+# JavaScript/TypeScript files
+[*.{js,mjs,ts,tsx,json}]
+indent_style = space
+indent_size = 2
+
+# Markdown files
+[*.md]
+trim_trailing_whitespace = false
+
+# YAML files
+[*.{yml,yaml}]
+indent_style = space
+indent_size = 2
+
+#
+# C# Linter
+#
+# ─────────────────────────────────────────────────────────────
+# 全体方針
+# ─────────────────────────────────────────────────────────────
+# C# files
+[*.cs]
+indent_size = 4
+
+# まず性能系を最優先で厳格（Error）
+dotnet_analyzer_diagnostic.category-Performance.severity = error
+
+# セキュリティ/使用法も厳しめ（必要に応じ調整）
+dotnet_analyzer_diagnostic.category-Security.severity = error
+dotnet_analyzer_diagnostic.category-Usage.severity = error
+
+# 設計は様子見で Warning（既存コードへの影響が大きいため）
+dotnet_analyzer_diagnostic.category-Design.severity = warning
+
+# スタイル/書式は CSharpier に任せるため、IDE のフォーマット系は基本オフ
+dotnet_diagnostic.IDE0055.severity = none      # Formatting
+dotnet_diagnostic.IDE0057.severity = none      # Unnecessary assignment formatting suggestions 等
+dotnet_diagnostic.IDE0160.severity = none      # Prefer primary constructors など見た目寄り提案は抑制
+dotnet_diagnostic.IDE0130.severity = none      # namespaceとフォルダー構造の一致
+
+# using の配置/並びは CSharpier が触るため衝突回避
+dotnet_diagnostic.IDE0065.severity = none      # using inside/outside namespace
+dotnet_diagnostic.IDE0005.severity = error     # 未使用 using は Error（※CSharpierは削除しないためアナライザーで担保）
+dotnet_diagnostic.SA1200.severity = none       # StyleCop: using placement
+dotnet_diagnostic.SA1210.severity = none       # StyleCop: using 並び順
+dotnet_diagnostic.SA1516.severity = none       # 要素間の空行（見た目）
+dotnet_diagnostic.SA1633.severity = none       # ファイルに標準ヘッダーが必要
+dotnet_diagnostic.RCS1169.severity = none      # UnityではSerializeField付きフィールドで誤検知するためRCS1169を無効化
+dotnet_diagnostic.SA1502.severity = none     # CSharpier の 1 行ブロックと衝突するため無効化
+
+# Roslynator は提案系が多いので全体は Warning から
+# （必要なものを徐々に引き上げる方針）
+# 代表的なパフォーマンス系は Error 推奨（例を下で個別指定）
+# ここではデフォルトは Warning に留め、個別に昇格
+dotnet_diagnostic.RCS*.severity = warning
+
+# StyleCop は“見た目ルール”中心なので原則 Warning
+# 必須のものだけ Error に（末尾改行など）
+dotnet_diagnostic.SA*.severity = warning
+dotnet_diagnostic.SA1518.severity = error      # 末尾改行を要求
+
+# ─────────────────────────────────────────────────────────────
+# 重要：性能まわりの個別昇格（CA/IDE/RCS 代表例）
+# ─────────────────────────────────────────────────────────────
+# .NET 公式（CA18xx/CA183x/CA184x あたり）
+dotnet_diagnostic.CA1802.severity = error   # const にできるフィールド
+dotnet_diagnostic.CA1812.severity = error   # 生成されない内部型の削除/可視化
+dotnet_diagnostic.CA1815.severity = error   # 値型のEquals/GetHashCode 実装
+dotnet_diagnostic.CA1820.severity = error   # 文字列と空文字の比較
+dotnet_diagnostic.CA1822.severity = none    # メンバーを static は無効化
+dotnet_diagnostic.CA1826.severity = error   # Any() vs Count()
+dotnet_diagnostic.CA1827.severity = error   # Count() を使用（LINQ→ICollection 等の適正化）
+dotnet_diagnostic.CA1829.severity = error   # Length/Count プロパティの活用
+dotnet_diagnostic.CA1831.severity = error   # AsSpan 等の効率 API
+dotnet_diagnostic.CA1834.severity = error   # StringBuilder.Append(char) など適切なオーバーロード
+dotnet_diagnostic.CA1835.severity = error   # 非同期ストリームの使用/ReadAsync 等
+dotnet_diagnostic.CA1845.severity = error   # Span ベースの列挙最適化
+dotnet_diagnostic.CA1852.severity = error   # Sealed にできる型
+dotnet_diagnostic.CA1860.severity = error   # Dictionary 生成時の容量指定
+dotnet_diagnostic.CA1869.severity = error   # Avoid stackalloc in loops 等（例）
+# ※ 利用 SDK/NetAnalyzers のバージョンで存在しない ID は無視されます
+
+# IDE 系（実害のある提案のみ昇格）
+dotnet_diagnostic.IDE0049.severity = warning # 簡易型名（性能には直結しない）
+dotnet_diagnostic.IDE0079.severity = warning # 不要な suppressions を削除
+dotnet_diagnostic.IDE0110.severity = error   # using 宣言の誤用でのパフォーマンス問題回避 など
+
+# Roslynator（代表的な性能寄りのみ昇格：存在すれば Error）
+dotnet_diagnostic.RCS1033.severity = error  # Simplify boolean expression（分岐最適化に寄与）
+dotnet_diagnostic.RCS1155.severity = error  # Use StringComparison オーバーロード
+dotnet_diagnostic.RCS1163.severity = none   # Unused parameter の除去は無効化
+dotnet_diagnostic.RCS1196.severity = error  # Call extension method as instance（インライン化・可読/性能）
+dotnet_diagnostic.RCS1246.severity = error  # Simplify coalesce / null-check パターン
+# ※ 手元の Roslynator 版に合わせて適宜増減してください
+
+# Unity 専用（Microsoft.Unity.Analyzers）
+# ※ ID はプロジェクトで使っている版に合わせて個別昇格を推奨。
+# 例：Update での LINQ 使用や Find 系 API の乱用など性能地雷を Error に。
+# dotnet_diagnostic.UNT000?.severity = error
+
+# this. を常に要求する StyleCop ルールをオフ
+dotnet_diagnostic.SA1101.severity = none
+# メンバー参照時のthis.修飾を省略する（必要な時のみ書く）
+dotnet_style_qualification_for_field = false:suggestion
+dotnet_style_qualification_for_property = false:suggestion
+dotnet_style_qualification_for_method = false:suggestion
+dotnet_style_qualification_for_event = false:suggestion
+
+# ─────────────────────────────────────────────────────────────
+# Unity の自動生成・ビルド生成物は解析対象外
+# ─────────────────────────────────────────────────────────────
+[Library/**]
+dotnet_analyzer_diagnostic.severity = none
+[Obj/**]
+dotnet_analyzer_diagnostic.severity = none
+[Temp/**]
+dotnet_analyzer_diagnostic.severity = none
+

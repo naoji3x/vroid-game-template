@@ -1,5 +1,4 @@
 {
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
   "prettier.requireConfig": false,
   "prettier.useEditorConfig": false,
@@ -18,12 +17,19 @@
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
   "[markdown]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
       "source.fixAll.markdownlint": "explicit"
     }
+  },
+  "[csharp]": {
+    "editor.defaultFormatter": "csharpier.csharpier-vscode",
+    "editor.formatOnSave": true
   },
   "markdownlint.config": {
     "extends": ".markdownlint.json"
@@ -97,6 +103,9 @@
     "*.sln": "*.csproj"
   },
   "dotnet.defaultSolution": "vroid-game-template.sln",
+  "omnisharp.enableEditorConfigSupport": true,
+  "omnisharp.enableRoslynAnalyzers": true,
+  "dotnet.format.enable": true,
   "cSpell.words": [
     "Cinemachine",
     "DEVLOG",
@@ -111,7 +120,9 @@
     "nologo",
     "Prefs",
     "Rokoko",
+    "Roslynator",
     "softprops",
+    "stylecop",
     "UGUI",
     "unshallow",
     "Vrms",

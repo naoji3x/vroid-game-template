@@ -1,13 +1,13 @@
+using System.IO;
 using UnityEditor;
 using UnityEngine;
-using System.IO;
 
 namespace TinyShrine.Base.Editor.Setup
 {
     [InitializeOnLoad]
     public static class ProjectSetupGuide
     {
-        private static readonly string GuideShownFilePath = "ProjectSettings/ProjectSetupGuide.shown";
+        private const string GuideShownFilePath = "ProjectSettings/ProjectSetupGuide.shown";
 
         static ProjectSetupGuide()
         {
@@ -63,7 +63,9 @@ namespace TinyShrine.Base.Editor.Setup
 
         public static void DownloadStarterAssets()
         {
-            Application.OpenURL("https://assetstore.unity.com/packages/essentials/starter-assets-character-controllers-urp-267961");
+            Application.OpenURL(
+                "https://assetstore.unity.com/packages/essentials/starter-assets-character-controllers-urp-267961"
+            );
         }
 
         public static void ImportTextMeshProEssentials()
@@ -73,7 +75,12 @@ namespace TinyShrine.Base.Editor.Setup
 
         public static void AssignDefaultFont()
         {
-            string[] targetDirectories = { "Assets/Common/Sample/Scenes", "Assets/Common/Sample/Prefabs", "Assets/Common/Runtime/Prefabs" };
+            string[] targetDirectories =
+            {
+                "Assets/Common/Sample/Scenes",
+                "Assets/Common/Sample/Prefabs",
+                "Assets/Common/Runtime/Prefabs",
+            };
             string defaultFontPath = "Assets/Common/Runtime/Fonts/MPLUS2-Medium SDF.asset";
             TmpFontReassignUtility.AssignDefaultFont(targetDirectories, defaultFontPath);
         }
@@ -95,7 +102,11 @@ namespace TinyShrine.Base.Editor.Setup
 
         public static void ShowWindow()
         {
-            ProjectSetupGuideWindow window = GetWindow<ProjectSetupGuideWindow>(true, "プロジェクトセットアップガイド", true);
+            ProjectSetupGuideWindow window = GetWindow<ProjectSetupGuideWindow>(
+                true,
+                "プロジェクトセットアップガイド",
+                true
+            );
             window.minSize = new Vector2(600, 500);
             window.maxSize = new Vector2(800, 700);
         }
@@ -108,7 +119,7 @@ namespace TinyShrine.Base.Editor.Setup
             GUIStyle titleStyle = new GUIStyle(EditorStyles.boldLabel)
             {
                 fontSize = 16,
-                alignment = TextAnchor.MiddleCenter
+                alignment = TextAnchor.MiddleCenter,
             };
             EditorGUILayout.LabelField("このプロジェクトの初期セットアップ手順", titleStyle);
 
@@ -117,25 +128,37 @@ namespace TinyShrine.Base.Editor.Setup
             // スクロール可能なエリア
             scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition);
 
-            DrawSetupStep("1", "Starter Assets のダウンロード",
+            DrawSetupStep(
+                "1",
+                "Starter Assets のダウンロード",
                 "Starter Assets: Character Controllers | URP を Asset Store からダウンロードしてインストールしてください。",
-                "Download Starter Assets: Character Controllers | URP",
-                () => ProjectSetupGuide.DownloadStarterAssets());
+                "Starter Assets: Character Controllers | URPのアセットストアを開く",
+                () => ProjectSetupGuide.DownloadStarterAssets()
+            );
 
-            DrawSetupStep("2", "TextMesh Pro の初期化",
+            DrawSetupStep(
+                "2",
+                "TextMesh Pro の初期化",
                 "Project Settings → TextMesh Pro で『Import TMP Essentials』をクリックしてください。",
-                "Import TextMesh Pro Essentials",
-                () => ProjectSetupGuide.ImportTextMeshProEssentials());
+                "TextMesh Proの設定画面を開く",
+                () => ProjectSetupGuide.ImportTextMeshProEssentials()
+            );
 
-            DrawSetupStep("3", "フォントの設定",
+            DrawSetupStep(
+                "3",
+                "フォントの設定",
                 "文字がうまく表示されない場合に実行してください。\nnullフォントにデフォルトフォントを自動設定します。",
-                "Assign Default Font (Null Only) in Scenes+Prefabs",
-                () => ProjectSetupGuide.AssignDefaultFont());
+                "シーンファイル、プレハブファイルのデフォルトFontを再設定",
+                () => ProjectSetupGuide.AssignDefaultFont()
+            );
 
-            DrawSetupStep("4", "VRM の再インポート",
-                "プロジェクト内の全VRMファイルを再インポートしてVRoidの表示を修正します。\n※VRoidがオレンジになる場合は再度実行してください。",
-                "Reimport Vrms",
-                () => ProjectSetupGuide.ReimportVrms());
+            DrawSetupStep(
+                "4",
+                "VRM の再インポート",
+                "プロジェクト内の全VRMファイルを再インポートしてVRoidの表示を修正します。\n※VRoidがピンクになる場合は再度実行してください。",
+                "VRMファイルの再インポート",
+                () => ProjectSetupGuide.ReimportVrms()
+            );
 
             EditorGUILayout.EndScrollView();
 
@@ -144,15 +167,12 @@ namespace TinyShrine.Base.Editor.Setup
             // フッター
             EditorGUILayout.BeginHorizontal();
             GUILayout.FlexibleSpace();
-            GUIStyle footerStyle = new GUIStyle(EditorStyles.miniLabel)
-            {
-                alignment = TextAnchor.MiddleCenter
-            };
+            GUIStyle footerStyle = new GUIStyle(EditorStyles.miniLabel) { alignment = TextAnchor.MiddleCenter };
             // ラベルを大きく・複数行で表示する
             GUIStyle footerLargeStyle = new GUIStyle(EditorStyles.wordWrappedLabel)
             {
                 fontSize = 12,
-                alignment = TextAnchor.MiddleCenter
+                alignment = TextAnchor.MiddleCenter,
             };
             EditorGUILayout.LabelField(
                 "この手順は Tools → Project → 1. Show Setup Guide からいつでも表示できます",
@@ -178,15 +198,18 @@ namespace TinyShrine.Base.Editor.Setup
             EditorGUILayout.Space(10);
         }
 
-        private void DrawSetupStep(string stepNumber, string title, string description, string menuName, System.Action menuAction)
+        private void DrawSetupStep(
+            string stepNumber,
+            string title,
+            string description,
+            string menuName,
+            System.Action menuAction
+        )
         {
             EditorGUILayout.BeginVertical("box");
 
             // ステップタイトル
-            GUIStyle stepStyle = new GUIStyle(EditorStyles.boldLabel)
-            {
-                fontSize = 14
-            };
+            GUIStyle stepStyle = new GUIStyle(EditorStyles.boldLabel) { fontSize = 14 };
             EditorGUILayout.LabelField($"ステップ {stepNumber}: {title}", stepStyle);
 
             EditorGUILayout.Space(5);

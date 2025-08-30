@@ -1,8 +1,8 @@
-using System.Linq;
-using UnityEngine;
-
 namespace TinyShrine.Base.Views.Agent
 {
+    using System.Linq;
+    using UnityEngine;
+
     [RequireComponent(typeof(Animator))]
     public class AnimationBridge : MonoBehaviour
     {
@@ -11,7 +11,8 @@ namespace TinyShrine.Base.Views.Agent
 
         [Header("Animator")]
         [Tooltip("Vroidに設定するAnimation Controller")]
-        [SerializeField] private RuntimeAnimatorController animatorController;
+        [SerializeField]
+        private RuntimeAnimatorController animatorController;
 
         private int speedHash;
         private int motionSpeedHash;
@@ -19,16 +20,17 @@ namespace TinyShrine.Base.Views.Agent
         private int jumpHash;
         private int freeFallHash;
 
-        void Awake()
+        private void Awake()
         {
             sourceAnimator = GetComponent<Animator>();
             targetAnimator = GetComponentsInChildren<Animator>(includeInactive: true)
-                       .FirstOrDefault(a => a.gameObject != this.gameObject);
+                .FirstOrDefault(a => a.gameObject != gameObject);
 
             if (targetAnimator)
             {
                 // AnimatorController を targetAnimator にコピー
                 targetAnimator.runtimeAnimatorController = animatorController;
+
                 // Animation Event Receiver を追加
                 targetAnimator.gameObject.AddComponent<AnimationEventReceiver>();
             }
@@ -40,9 +42,13 @@ namespace TinyShrine.Base.Views.Agent
             freeFallHash = Animator.StringToHash("FreeFall");
         }
 
-        void Update()
+        private void Update()
         {
-            if (!targetAnimator) return;
+            if (!targetAnimator)
+            {
+                return;
+            }
+
             targetAnimator.SetFloat(speedHash, sourceAnimator.GetFloat(speedHash));
             targetAnimator.SetFloat(motionSpeedHash, sourceAnimator.GetFloat(motionSpeedHash));
             targetAnimator.SetBool(groundedHash, sourceAnimator.GetBool(groundedHash));

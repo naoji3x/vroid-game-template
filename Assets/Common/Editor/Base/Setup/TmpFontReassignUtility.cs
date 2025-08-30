@@ -1,7 +1,7 @@
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using TMPro;
 
 namespace TinyShrine.Base.Editor.Setup
 {
@@ -10,8 +10,8 @@ namespace TinyShrine.Base.Editor.Setup
         /// <summary>
         /// 指定されたディレクトリ内のPrefabとSceneファイルでTextMeshProUGUIのフォントがnullの場合にデフォルトフォントを設定する
         /// </summary>
-        /// <param name="targetDirectories">対象ディレクトリパス配列</param>
-        /// <param name="defaultFontPath">デフォルトフォントのパス</param>
+        /// <param name="targetDirectories">対象ディレクトリパス配列.</param>
+        /// <param name="defaultFontPath">デフォルトフォントのパス.</param>
         public static void AssignDefaultFont(string[] targetDirectories, string defaultFontPath)
         {
             // デフォルトフォントをロード
@@ -45,7 +45,9 @@ namespace TinyShrine.Base.Editor.Setup
             }
 
             AssetDatabase.SaveAssets();
-            Debug.Log($"処理完了: {totalProcessed}個のファイルを処理し、{totalAssigned}個のTextMeshProUGUIにフォントを設定しました。");
+            Debug.Log(
+                $"処理完了: {totalProcessed}個のファイルを処理し、{totalAssigned}個のTextMeshProUGUIにフォントを設定しました。"
+            );
         }
 
         private static (int processed, int assigned) ProcessPrefabs(string directory, TMP_FontAsset defaultFont)
@@ -59,7 +61,10 @@ namespace TinyShrine.Base.Editor.Setup
                 string path = AssetDatabase.GUIDToAssetPath(guid);
                 GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
 
-                if (prefab == null) continue;
+                if (prefab == null)
+                {
+                    continue;
+                }
 
                 bool modified = false;
                 TextMeshProUGUI[] tmpComponents = prefab.GetComponentsInChildren<TextMeshProUGUI>(true);
@@ -86,7 +91,7 @@ namespace TinyShrine.Base.Editor.Setup
             return (processed, assigned);
         }
 
-        private static (int processed, int assigned) ProcessScenes(string directory, TMP_FontAsset defaultFont)
+        private static (int Processed, int Assigned) ProcessScenes(string directory, TMP_FontAsset defaultFont)
         {
             string[] sceneGuids = AssetDatabase.FindAssets("t:Scene", new[] { directory });
             int processed = 0;

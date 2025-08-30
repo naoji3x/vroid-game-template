@@ -1,0 +1,23 @@
+<Project>
+  <PropertyGroup>
+    <!-- .NET 公式アナライザーを有効化し、最新ルールセットを使用 -->
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <AnalysisLevel>latest</AnalysisLevel>
+    <!-- ビルド全警告→エラー化は行わず、.editorconfig で細かく制御 -->
+    <!-- <TreatWarningsAsErrors>true</TreatWarningsAsErrors> -->
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- 公式 .NET アナライザー -->
+    <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="8.*" PrivateAssets="all" />
+    <!-- Unity 専用アナライザー -->
+    <PackageReference Include="Microsoft.Unity.Analyzers" Version="1.*" PrivateAssets="all" />
+    <!-- Roslynator（リファクタ/性能提案） -->
+    <PackageReference Include="Roslynator.Analyzers" Version="4.*" PrivateAssets="all" />
+    <!-- StyleCop（スタイル規約補強） -->
+    <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.507" PrivateAssets="all" />
+  </ItemGroup>
+  <!-- stylecop.json を全プロジェクトへ配布（存在する場合のみ有効） -->
+  <ItemGroup>
+    <AdditionalFiles Include="stylecop.json" Condition="Exists('stylecop.json')" />
+  </ItemGroup>
+</Project>

@@ -29,6 +29,31 @@ pre-commit:
       glob: '*.{js,mjs,ts,tsx}'
       run: npx eslint {staged_files} --max-warnings 0
 
+    format-csharp:
+#      files: git diff --cached --name-only
+      glob: 'Assets/{Scripts,Common}/**/*.cs'
+      run: |
+        if [ -n "{staged_files}" ]; then
+          dotnet tool restore
+          dotnet tool run csharpier format {staged_files}
+        else
+          echo "No C# files to check."
+        fi
+
+    lint-csharp:
+      files: git diff --cached --name-only
+      glob: 'Assets/{Scripts,Common}/**/*.cs'
+      run: |
+        FILES_SEMICOLON=$(echo "{files}" | tr ' ' ';')
+        if [ -n "$FILES_SEMICOLON" ]; then
+          dotnet format analyzers ./vroid-game-template.sln \
+          --include "$FILES_SEMICOLON" \
+          --verify-no-changes \
+          --verbosity normal
+        else
+          echo "No C# files to check."
+        fi
+
 commit-msg:
   commands:
     commitlint:

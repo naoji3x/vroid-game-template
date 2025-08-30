@@ -20,7 +20,12 @@
     "release:prepare": "node scripts/release_prepare.mjs",
     "release:tag": "node scripts/release_tag.mjs",
     "test:dotnet": "dotnet test --nologo vroid-game-template.sln",
-    "build:dotnet": "dotnet build --nologo -c Release vroid-game-template.sln"
+    "build:dotnet": "dotnet build --nologo -c Release vroid-game-template.sln",
+    "dotnet:restore": "dotnet tool restore",
+    "format:cs": "npm run dotnet:restore && dotnet tool run csharpier format ./Assets/Common ./Assets/Scripts",
+    "format:cs:check": "npm run dotnet:restore && dotnet tool run csharpier check ./Assets/Common ./Assets/Scripts",
+    "lint:cs:check": "dotnet format analyzers ./vroid-game-template.sln --verify-no-changes --include ./Assets/Common ./Assets/Scripts",
+    "lint:cs": "dotnet format analyzers ./vroid-game-template.sln --include ./Assets/Common ./Assets/Scripts --verbosity diagnostic"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.5.0",

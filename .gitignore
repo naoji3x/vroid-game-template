@@ -83,6 +83,11 @@ crashlytics-build.properties
 # Assets/Packages フォルダ（NuGetForUnityのPackageを保存するフォルダ）をgit管理から除外
 /[Aa]ssets/[Pp]ackages/
 
+# NuGet
+/[Pp]ackages/
+!/[Pp]ackages/manifest.json
+!/[Pp]ackages/package-lock.json
+
 # misc
 .DS_Store
 *.pem

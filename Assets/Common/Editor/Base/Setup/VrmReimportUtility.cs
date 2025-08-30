@@ -1,6 +1,6 @@
+using System.IO;
 using UnityEditor;
 using UnityEngine;
-using System.IO;
 
 namespace TinyShrine.Base.Editor.Setup
 {
@@ -26,9 +26,10 @@ namespace TinyShrine.Base.Editor.Setup
                     EditorUtility.DisplayProgressBar("Reimporting VRM", p, (float)i / total);
 
                     // UniVRM の Importer を再実行（同期・強制）
-                    AssetDatabase.ImportAsset(p,
-                        ImportAssetOptions.ForceUpdate |
-                        ImportAssetOptions.ForceSynchronousImport);
+                    AssetDatabase.ImportAsset(
+                        p,
+                        ImportAssetOptions.ForceUpdate | ImportAssetOptions.ForceSynchronousImport
+                    );
 
                     // 念のため生成物も最新化（同フォルダに生成される Prefab/Materials など）
                     // → ImportAssetだけで十分なはずですが、必要に応じて追加の処理を入れられます。
@@ -44,7 +45,7 @@ namespace TinyShrine.Base.Editor.Setup
         }
 
         // --- helpers ---
-        static bool FindAnyVrm(out string[] fullPaths)
+        private static bool FindAnyVrm(out string[] fullPaths)
         {
             // Assets 以下を再帰で走査して *.vrm を収集
             System.Collections.Generic.List<string> list = new System.Collections.Generic.List<string>();
@@ -54,7 +55,7 @@ namespace TinyShrine.Base.Editor.Setup
             return fullPaths.Length > 0;
         }
 
-        static void CollectVrmFiles(string dir, System.Collections.Generic.List<string> list)
+        private static void CollectVrmFiles(string dir, System.Collections.Generic.List<string> list)
         {
             // .vrm は .glb 互換ですが拡張子で判定
             string[] files = Directory.GetFiles(dir, "*.vrm", SearchOption.TopDirectoryOnly);
@@ -64,16 +65,20 @@ namespace TinyShrine.Base.Editor.Setup
             foreach (string d in dirs)
             {
                 // 隠し/パッケージ/Library をスキップ（Assets 内だけ走査）
-                if (Path.GetFileName(d).StartsWith(".")) continue;
+                if (Path.GetFileName(d).StartsWith('.'))
+                {
+                    continue;
+                }
+
                 CollectVrmFiles(d, list);
             }
         }
 
-        static string ToProjectRelative(string absolute)
+        private static string ToProjectRelative(string absolute)
         {
             // …/Project/ の手前まで削って "Assets/…" 形式に
             string proj = Path.GetDirectoryName(Application.dataPath).Replace("\\", "/");
-            return absolute.Replace("\\", "/").Replace(proj + "/", "");
+            return absolute.Replace("\\", "/").Replace(proj + "/", string.Empty);
         }
     }
 }

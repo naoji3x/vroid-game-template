@@ -7,20 +7,29 @@ namespace TinyShrine.Base.Views.Agent
     public class NavMeshAgentController : MonoBehaviour
     {
         [Header("Target")]
-        [SerializeField] private GameObject goal;
-        [SerializeField] private bool moveOnStart = true;
+        [SerializeField]
+        private GameObject goal;
+
+        [SerializeField]
+        private bool moveOnStart = true;
 
         [Header("Arrival")]
         [Tooltip("到達とみなす距離（Stopping Distance より少し大きめ推奨）")]
-        [SerializeField] private float arriveThreshold = 0.5f;
+        [SerializeField]
+        private float arriveThreshold = 0.5f;
 
         [Header("Animator")]
         [Tooltip("Vroidに設定するAnimation Controller")]
-        [SerializeField] private RuntimeAnimatorController animatorController;
+        [SerializeField]
+        private RuntimeAnimatorController animatorController;
+
         [Tooltip("Animatorの速度のパラメータ名(Float)")]
-        [SerializeField] private string speedParam = "Speed";
+        [SerializeField]
+        private string speedParam = "Speed";
+
         [Tooltip("Animatorのモーション速度のパラメータ名(Float)")]
-        [SerializeField] private string motionSpeedParam = "MotionSpeed";
+        [SerializeField]
+        private string motionSpeedParam = "MotionSpeed";
 
         private NavMeshAgent agent;
         private Animator animator;
@@ -29,7 +38,19 @@ namespace TinyShrine.Base.Views.Agent
         private int speedHash;
         private int motionSpeedHash;
 
-        void Awake()
+        /// <summary>指定位置へ移動開始（外部からも呼べます）</summary>
+        public void MoveTo(Vector3 worldPos)
+        {
+            arrived = false;
+            if (!agent.enabled)
+            {
+                return;
+            }
+            agent.isStopped = false;
+            agent.SetDestination(worldPos);
+        }
+
+        private void Awake()
         {
             agent = GetComponent<NavMeshAgent>();
             animator = GetComponentInChildren<Animator>();
@@ -37,6 +58,7 @@ namespace TinyShrine.Base.Views.Agent
 
             // Animation Event Receiver を追加
             animator.gameObject.AddComponent<AnimationEventReceiver>();
+
             // エージェントが位置を制御
             animator.applyRootMotion = false;
 
@@ -44,7 +66,7 @@ namespace TinyShrine.Base.Views.Agent
             motionSpeedHash = Animator.StringToHash(motionSpeedParam);
         }
 
-        void Start()
+        private void Start()
         {
             if (moveOnStart && goal != null)
             {
@@ -52,7 +74,7 @@ namespace TinyShrine.Base.Views.Agent
             }
         }
 
-        void Update()
+        private void Update()
         {
             var speed = agent.velocity.sqrMagnitude > 0 ? agent.velocity.magnitude : 0f;
 
@@ -74,15 +96,5 @@ namespace TinyShrine.Base.Views.Agent
                 }
             }
         }
-
-        /// <summary>指定位置へ移動開始（外部からも呼べます）</summary>
-        public void MoveTo(Vector3 worldPos)
-        {
-            arrived = false;
-            if (!agent.enabled) return;
-            agent.isStopped = false;
-            agent.SetDestination(worldPos);
-        }
-
     }
 }
