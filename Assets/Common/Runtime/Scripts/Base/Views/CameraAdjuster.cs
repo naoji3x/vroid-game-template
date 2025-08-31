@@ -1,9 +1,9 @@
+using UnityEngine;
+
 namespace TinyShrine.Base.Views
 {
-    using UnityEngine;
-
     /// <summary>
-    /// カメラのアスペクト比を調整するコンポーネント。
+    /// /// カメラのアスペクト比を調整するコンポーネント。
     /// 横幅を10unitsに固定し、画面のアスペクト比に基づいてカメラのorthographicSizeを設定します.
     /// </summary>
     [RequireComponent(typeof(Camera))]

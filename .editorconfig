@@ -50,15 +50,21 @@ dotnet_diagnostic.IDE0057.severity = none      # Unnecessary assignment formatti
 dotnet_diagnostic.IDE0160.severity = none      # Prefer primary constructors など見た目寄り提案は抑制
 dotnet_diagnostic.IDE0130.severity = none      # namespaceとフォルダー構造の一致
 
+# StyleCop は“見た目ルール”中心なので原則 Warning
+# 必須のものだけ Error に（末尾改行など）
+dotnet_diagnostic.SA*.severity = warning
+dotnet_diagnostic.SA1518.severity = error      # 末尾改行を要求
+
 # using の配置/並びは CSharpier が触るため衝突回避
-dotnet_diagnostic.IDE0065.severity = none      # using inside/outside namespace
+csharp_using_directive_placement = outside_namespace:error
+dotnet_diagnostic.IDE0065.severity = error     # using inside/outside namespace
 dotnet_diagnostic.IDE0005.severity = error     # 未使用 using は Error（※CSharpierは削除しないためアナライザーで担保）
-dotnet_diagnostic.SA1200.severity = none       # StyleCop: using placement
+dotnet_diagnostic.SA1200.severity = error      # StyleCop: using placement
 dotnet_diagnostic.SA1210.severity = none       # StyleCop: using 並び順
 dotnet_diagnostic.SA1516.severity = none       # 要素間の空行（見た目）
 dotnet_diagnostic.SA1633.severity = none       # ファイルに標準ヘッダーが必要
 dotnet_diagnostic.RCS1169.severity = none      # UnityではSerializeField付きフィールドで誤検知するためRCS1169を無効化
-dotnet_diagnostic.SA1502.severity = none     # CSharpier の 1 行ブロックと衝突するため無効化
+dotnet_diagnostic.SA1502.severity = none       # CSharpier の 1 行ブロックと衝突するため無効化
 
 # Roslynator は提案系が多いので全体は Warning から
 # （必要なものを徐々に引き上げる方針）
@@ -66,18 +72,13 @@ dotnet_diagnostic.SA1502.severity = none     # CSharpier の 1 行ブロック�
 # ここではデフォルトは Warning に留め、個別に昇格
 dotnet_diagnostic.RCS*.severity = warning
 
-# StyleCop は“見た目ルール”中心なので原則 Warning
-# 必須のものだけ Error に（末尾改行など）
-dotnet_diagnostic.SA*.severity = warning
-dotnet_diagnostic.SA1518.severity = error      # 末尾改行を要求
-
 # ─────────────────────────────────────────────────────────────
 # 重要：性能まわりの個別昇格（CA/IDE/RCS 代表例）
 # ─────────────────────────────────────────────────────────────
 # .NET 公式（CA18xx/CA183x/CA184x あたり）
 dotnet_diagnostic.CA1802.severity = error   # const にできるフィールド
-dotnet_diagnostic.CA1812.severity = error   # 生成されない内部型の削除/可視化
-dotnet_diagnostic.CA1815.severity = error   # 値型のEquals/GetHashCode 実装
+dotnet_diagnostic.CA1812.severity = error   # 生成さ※れない内部型の削除/可視化
+dotnet_diagnostic.CA1815.severity = error   # 値型のE※quals/GetHashCode 実装
 dotnet_diagnostic.CA1820.severity = error   # 文字列と空文字の比較
 dotnet_diagnostic.CA1822.severity = none    # メンバーを static は無効化
 dotnet_diagnostic.CA1826.severity = error   # Any() vs Count()

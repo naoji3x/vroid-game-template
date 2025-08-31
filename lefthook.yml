@@ -33,7 +33,7 @@ pre-commit:
 #      files: git diff --cached --name-only
       glob: 'Assets/{Scripts,Common}/**/*.cs'
       run: |
-        if [ -n "{staged_files}" ]; then
+        if [ -n "\"{staged_files}\"" ]; then
           dotnet tool restore
           dotnet tool run csharpier format {staged_files}
         else
@@ -46,7 +46,7 @@ pre-commit:
       run: |
         FILES_SEMICOLON=$(echo "{files}" | tr ' ' ';')
         if [ -n "$FILES_SEMICOLON" ]; then
-          dotnet format analyzers ./vroid-game-template.sln \
+          dotnet format analyzers Lint.csproj \
           --include "$FILES_SEMICOLON" \
           --verify-no-changes \
           --verbosity normal

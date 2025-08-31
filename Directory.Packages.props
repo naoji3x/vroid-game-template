@@ -1,0 +1,13 @@
+<Project>
+  <PropertyGroup>
+    <!-- これが無いと環境によって CPM が効かないケースがあります -->
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- 浮動版は使わず固定。角括弧は“下限を含む”明示でNU1604を確実に封じます -->
+    <PackageVersion Include="Microsoft.Unity.Analyzers" Version="[1.25.0]" />
+    <PackageVersion Include="Roslynator.Analyzers" Version="[4.14.0]" />
+    <PackageVersion Include="StyleCop.Analyzers" Version="[1.1.118]" />
+    <!-- ↑ もし 1.2.0-beta.507 を使いたいならここを [1.2.0-beta.507] に統一 -->
+  </ItemGroup>
+</Project>
