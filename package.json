@@ -24,8 +24,8 @@
     "dotnet:restore": "dotnet tool restore",
     "format:cs": "npm run dotnet:restore && dotnet tool run csharpier format ./Assets/Common ./Assets/Scripts",
     "format:cs:check": "npm run dotnet:restore && dotnet tool run csharpier check ./Assets/Common ./Assets/Scripts",
-    "lint:cs:check": "dotnet format analyzers Lint.csproj --verify-no-changes --include ./Assets/Common --verbosity diagnostic",
-    "lint:cs": "dotnet format analyzers Lint.csproj --include ./Assets/Common ./Assets/Scripts --verbosity diagnostic"
+    "lint:cs:check": "dotnet format analyzers Lint.csproj --verify-no-changes --include \"Assets/Common/**/*.cs\" --include \"Assets/Scripts/**/*.cs\" --verbosity diagnostic --exclude-diagnostics CS0246 IDE0005",
+    "lint:cs": "dotnet format analyzers Lint.csproj --include \"Assets/Common/**/*.cs\" --include \"Assets/Scripts/**/*.cs\" --include \"Assets/Scripts/**/*.cs\" --verbosity diagnostic --exclude-diagnostics CS0246 IDE0005"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.5.0",

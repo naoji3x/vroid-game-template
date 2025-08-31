@@ -2,6 +2,7 @@
   <PropertyGroup>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
     <AnalysisLevel>latest</AnalysisLevel>
+    <Nullable>enable</Nullable>
     <!-- TreatWarningsAsErrors は .editorconfig / CI で制御でOK -->
   </PropertyGroup>
   <!-- stylecop.json を全プロジェクトへ配布（存在する場合のみ） -->

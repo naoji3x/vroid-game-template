@@ -18,29 +18,6 @@ namespace TinyShrine.Base.Editor.Setup
             }
         }
 
-        private static bool IsGuideShown()
-        {
-            return File.Exists(GuideShownFilePath);
-        }
-
-        private static void SetGuideShown()
-        {
-            // プロジェクト単位での設定保存
-            string directory = Path.GetDirectoryName(GuideShownFilePath);
-            if (!Directory.Exists(directory))
-            {
-                Directory.CreateDirectory(directory);
-            }
-            File.WriteAllText(GuideShownFilePath, System.DateTime.Now.ToString());
-        }
-
-        private static void ShowGuideDelayed()
-        {
-            EditorApplication.update -= ShowGuideDelayed;
-            ShowGuide();
-            SetGuideShown();
-        }
-
         [MenuItem("Tools/Project/1. Show Setup Guide")]
         public static void ShowSetupGuide()
         {
@@ -93,6 +70,30 @@ namespace TinyShrine.Base.Editor.Setup
         private static void ShowGuide()
         {
             ProjectSetupGuideWindow.ShowWindow();
+        }
+
+        private static bool IsGuideShown()
+        {
+            return File.Exists(GuideShownFilePath);
+        }
+
+        private static void SetGuideShown()
+        {
+            // プロジェクト単位での設定保存
+            string? directory = Path.GetDirectoryName(GuideShownFilePath);
+            if (!Directory.Exists(directory))
+            {
+                Directory.CreateDirectory(directory);
+            }
+
+            File.WriteAllText(GuideShownFilePath, System.DateTime.Now.ToString());
+        }
+
+        private static void ShowGuideDelayed()
+        {
+            EditorApplication.update -= ShowGuideDelayed;
+            ShowGuide();
+            SetGuideShown();
         }
     }
 

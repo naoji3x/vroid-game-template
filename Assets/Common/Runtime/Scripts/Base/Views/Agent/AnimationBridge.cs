@@ -1,8 +1,8 @@
+using System.Linq;
+using UnityEngine;
+
 namespace TinyShrine.Base.Views.Agent
 {
-    using System.Linq;
-    using UnityEngine;
-
     [RequireComponent(typeof(Animator))]
     public class AnimationBridge : MonoBehaviour
     {

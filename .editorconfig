@@ -119,6 +119,21 @@ dotnet_style_qualification_for_property = false:suggestion
 dotnet_style_qualification_for_method = false:suggestion
 dotnet_style_qualification_for_event = false:suggestion
 
+# CSharpier と衝突する見た目系は無効化（CSharpierに一任）
+# 空行・改行・括弧の前後空白など
+dotnet_diagnostic.SA1009.severity = none   # ) の前の空白
+dotnet_diagnostic.SA1111.severity = none   # 最後の引数と ) の改行位置
+dotnet_diagnostic.SA1513.severity = none   # 閉じカッコの次に空行
+dotnet_diagnostic.SA1515.severity = none   # 1行コメントの前に空行
+dotnet_diagnostic.SA1629.severity = none   # ドキュコメントの末尾ピリオド
+
+# 1ファイル1型はスタイル好み。運用で許容するなら無効化
+dotnet_diagnostic.SA1402.severity = none
+
+# Unity の命名と衝突（callbackOrder など）を Editor 下だけで無効化
+[Assets/**/Editor/**.cs]
+dotnet_diagnostic.SA1300.severity = none   # 先頭大文字要求（Unityの命名に合わせてオフ）
+
 # ─────────────────────────────────────────────────────────────
 # Unity の自動生成・ビルド生成物は解析対象外
 # ─────────────────────────────────────────────────────────────
