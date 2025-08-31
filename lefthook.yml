@@ -63,6 +63,7 @@ pre-commit:
 
         rm -f "$tmp"
         exit $rc
+      stage_fixed: true
 
     lint-csharp:
       glob: 'Assets/{Scripts,Common}/**/*.cs'

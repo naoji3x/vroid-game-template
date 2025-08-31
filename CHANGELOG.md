@@ -25,6 +25,8 @@ The format is based on Keep a Changelog, and this project adheres to Semantic Ve
 
 ### Build
 
+- C#のフォーマッター、リンターをpre-commitに追加
+
 ### Docs
 
 - CONTRIBUTING.mdの追加

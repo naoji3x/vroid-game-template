@@ -90,12 +90,16 @@ THE SOFTWARE.
 
 ## 🙏 Credits
 
-- Unity 6000 LTS Universal 3D Template
-- UniVRM
-- LitMotion
-- Smart Addresser
-- UniTask
-- UI Effect
-- VContainer
-- VRM 1.0
-- R3
+- [Unity 6000 LTS Universal 3D Template](https://unity.com) — Unity Standard License
+- [UniVRM](https://github.com/vrm-c/UniVRM) — MIT
+- [LitMotion](https://github.com/annulusgames/LitMotion) — MIT
+- [Smart Addresser](https://openupm.com/packages/jp.co.cyberagent.smartaddresser/) — MIT
+- [UniTask](https://github.com/Cysharp/UniTask) — MIT
+- [UIEffect](https://github.com/mob-sakai/UIEffect) — MIT
+- [VContainer](https://github.com/hadashiA/VContainer) — MIT
+- [VRM 1.0](https://vrm.dev/en/licenses/1.0/) — VRM Public License 1.0
+- [R3](https://github.com/Cysharp/R3) — MIT
+- [CSharpier](https://github.com/belav/csharpier) — MIT
+- [Unity.Analyzers](https://github.com/microsoft/Microsoft.Unity.Analyzers) — MIT
+- [Roslynator.Analyzers](https://github.com/dotnet/roslynator) — Apache-2.0
+- [StyleCop.Analyzers](https://github.com/DotNetAnalyzers/StyleCopAnalyzers) — MIT
