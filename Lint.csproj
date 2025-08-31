@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <!-- 解析を強めに -->
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <AnalysisLevel>latest</AnalysisLevel>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <RunAnalyzersDuringBuild>true</RunAnalyzersDuringBuild>
+    <RunAnalyzersDuringLiveAnalysis>true</RunAnalyzersDuringLiveAnalysis>
+    <!-- 既定の Compile 自動追加を止めて、明示 Include のみにする -->
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <!-- 実行物は不要 -->
+    <OutputType>Exe</OutputType>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+  </PropertyGroup>
+  <!-- Unity のソースだけを明示的に取り込む（必要に応じて Exclude を調整） -->
+  <ItemGroup>
+    <Compile
+      Include="Assets/**/*.cs"
+      Exclude="
+               Assets/**/obj/**;
+               Assets/**/bin/**;
+               Library/**;
+               Obj/**;
+               Temp/**;
+               Packages/**"
+    />
+  </ItemGroup>
+  <!-- アナライザー -->
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Unity.Analyzers" PrivateAssets="all" />
+    <PackageReference Include="Roslynator.Analyzers" PrivateAssets="all" />
+    <PackageReference Include="StyleCop.Analyzers" PrivateAssets="all" />
+  </ItemGroup>
+</Project>

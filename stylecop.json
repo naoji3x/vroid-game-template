@@ -13,7 +13,7 @@
       "newlineAtEndOfFile": "require"
     },
     "orderingRules": {
-      "usingDirectivesPlacement": "insideNamespace",
+      "usingDirectivesPlacement": "outsideNamespace",
       "systemUsingDirectivesFirst": true,
       "blankLinesBetweenUsingGroups": "allow"
     }
