@@ -1,7 +1,8 @@
+using TinyShrine.VRoid.Agents.Views;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace TinyShrine.Base.Views.Agent
+namespace TinyShrine.VRoid.Agents.Controllers
 {
     [RequireComponent(typeof(NavMeshAgent))]
     public class NavMeshAgentController : MonoBehaviour

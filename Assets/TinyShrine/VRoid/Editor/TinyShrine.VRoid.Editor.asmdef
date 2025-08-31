@@ -1,0 +1,16 @@
+{
+    "name": "TinyShrine.VRoid.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:c5858bc832d814bdf803d4687dbeae32"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

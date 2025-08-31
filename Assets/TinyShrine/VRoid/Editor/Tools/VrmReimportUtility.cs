@@ -2,7 +2,7 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 
-namespace TinyShrine.Base.Editor.Setup
+namespace TinyShrine.VRoid.Editor.Tools
 {
     public static class VrmReimportUtility
     {

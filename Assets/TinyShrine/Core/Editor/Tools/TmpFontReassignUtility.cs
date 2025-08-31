@@ -3,7 +3,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace TinyShrine.Base.Editor.Setup
+namespace TinyShrine.Core.Editor.Tools
 {
     public static class TmpFontReassignUtility
     {

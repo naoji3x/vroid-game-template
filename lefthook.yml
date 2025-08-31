@@ -26,24 +26,14 @@ pre-commit:
       glob: '*.{js,mjs,ts,tsx}'
       run: npx eslint {staged_files} --max-warnings 0
 
-    # format-csharp:
-    #   glob: 'Assets/{Scripts,Common}/**/*.cs'
-    #   run: |
-    #     if [ -n "\"{staged_files}\"" ]; then
-    #       dotnet tool restore
-    #       dotnet tool run csharpier format {staged_files}
-    #     else
-    #       echo "No C# files to check."
-    #     fi
-
     format-csharp:
-      glob: 'Assets/{Scripts,Common}/**/*.cs'
+      glob: 'Assets/{Scripts,TinyShrine}/**/*.cs'
       run: |
         # ステージ済みの .cs を NUL 区切りで安全に取得（スペース/日本語パスOK）
         tmp="$(mktemp)"
         git -c core.quotepath=false diff --cached --name-only -z --diff-filter=ACM -- \
           'Assets/Scripts/**/*.cs' \
-          'Assets/Common/**/*.cs' > "$tmp"
+          'Assets/TinyShrine/**/*.cs' > "$tmp"
 
         if [ ! -s "$tmp" ]; then
           echo "No C# files to check."
@@ -66,13 +56,13 @@ pre-commit:
       stage_fixed: true
 
     lint-csharp:
-      glob: 'Assets/{Scripts,Common}/**/*.cs'
+      glob: 'Assets/{Scripts,TinyShrine}/**/*.cs'
       run: |
         # ステージ済みの .cs を NUL 区切りで安全に取得（スペース/日本語パスOK）
         tmp="$(mktemp)"
         git -c core.quotepath=false diff --cached --name-only -z --diff-filter=ACM -- \
           'Assets/Scripts/**/*.cs' \
-          'Assets/Common/**/*.cs' > "$tmp"
+          'Assets/TinyShrine/**/*.cs' > "$tmp"
 
         if [ ! -s "$tmp" ]; then
           echo "No C# files to check."

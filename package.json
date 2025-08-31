@@ -22,10 +22,10 @@
     "test:dotnet": "dotnet test --nologo vroid-game-template.sln",
     "build:dotnet": "dotnet build --nologo -c Release vroid-game-template.sln",
     "dotnet:restore": "dotnet tool restore",
-    "format:cs": "npm run dotnet:restore && dotnet tool run csharpier format ./Assets/Common ./Assets/Scripts",
-    "format:cs:check": "npm run dotnet:restore && dotnet tool run csharpier check ./Assets/Common ./Assets/Scripts",
-    "lint:cs:check": "dotnet format analyzers Lint.csproj --verify-no-changes --include \"Assets/Common/**/*.cs\" --include \"Assets/Scripts/**/*.cs\" --verbosity diagnostic --exclude-diagnostics CS0246 IDE0005",
-    "lint:cs": "dotnet format analyzers Lint.csproj --include \"Assets/Common/**/*.cs\" --include \"Assets/Scripts/**/*.cs\" --include \"Assets/Scripts/**/*.cs\" --verbosity diagnostic --exclude-diagnostics CS0246 IDE0005"
+    "format:cs": "npm run dotnet:restore && dotnet tool run csharpier format ./Assets/TinyShrine ./Assets/Scripts",
+    "format:cs:check": "npm run dotnet:restore && dotnet tool run csharpier check ./Assets/TinyShrine ./Assets/Scripts",
+    "lint:cs:check": "dotnet format analyzers Lint.csproj --verify-no-changes --include \"Assets/TinyShrine/**/*.cs\" --include \"Assets/Scripts/**/*.cs\" --verbosity diagnostic --exclude-diagnostics CS0246 IDE0005",
+    "lint:cs": "dotnet format analyzers Lint.csproj --include \"Assets/TinyShrine/**/*.cs\" --include \"Assets/Scripts/**/*.cs\" --verbosity diagnostic --exclude-diagnostics CS0246 IDE0005"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.5.0",

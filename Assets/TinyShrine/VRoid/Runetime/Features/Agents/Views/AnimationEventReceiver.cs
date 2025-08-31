@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace TinyShrine.Base.Views.Agent
+namespace TinyShrine.VRoid.Agents.Views
 {
     public class AnimationEventReceiver : MonoBehaviour
     {
