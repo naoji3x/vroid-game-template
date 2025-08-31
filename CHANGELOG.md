@@ -8,12 +8,7 @@ The format is based on Keep a Changelog, and this project adheres to Semantic Ve
 
 ### Added
 
-- C#のフォーマッターの追加
-- C#のリンターの追加
-
 ### Changed
-
-- ProjectSetupGuideのボタンを日本語に変更
 
 ### Fixed
 
@@ -25,19 +20,52 @@ The format is based on Keep a Changelog, and this project adheres to Semantic Ve
 
 ### Build
 
+### Docs
+
+> このファイルはプロジェクトの各リリースごとに更新してください。
+
+## [v0.1.5] - 2025-08-31
+
+### Added
+
+- C#のフォーマッターの追加
+- C#のリンターの追加
+
+- ProjectSetupGuideのボタンを日本語に変更
+
+### Build
+
 - C#のフォーマッター、リンターをpre-commitに追加
 
 ### Docs
 
 - CONTRIBUTING.mdの追加
-  - 開発環境に関する情報を追加(git, dotnet, nodeのインストールが必須であることを明記)
-  - commitlintについての補足説明
 
-> このファイルはプロジェクトの各リリースごとに更新してください。
+## [v0.1.4] - 2025-08-24
+
+### Added
+
+- Recorder packageの追加
+
+### Docs
+
+- サンプルのスクリーンショットとTL;DRの文章の追加
+
+## [v0.1.3] - 2025-08-24
+
+### Fixed
+
+- 初期設定アセットのディレクトリの修正、セットアップガイドの表示フラグの修正
+
+## [v0.1.2] - 2025-08-24
+
+### Added
+
+- Appバージョンチェックの追加、archive名の変更
 
 ## [v0.1.1] - 2025-08-24
 
-### Added v0.1.1
+### Added
 
 αリリース
 
@@ -52,25 +80,3 @@ The format is based on Keep a Changelog, and this project adheres to Semantic Ve
 - README, DEVLOG, CHANGELOG、README_ProjectSettings_Checklist、ライセンスファイル追加
 - nodeを追加して、CHANGELOGの自動更新やリリースタグ付けをスクリプト化
 - プルリクエストの自動生成を追加
-
-## [v0.1.2] - 2025-08-24
-
-### Added v0.1.2
-
-- Appバージョンチェックの追加、archive名の変更
-
-## [v0.1.3] - 2025-08-24
-
-### Fixed v0.1.3
-
-- 初期設定アセットのディレクトリの修正、セットアップガイドの表示フラグの修正
-
-## [v0.1.4] - 2025-08-24
-
-### Added v0.1.4
-
-- Recorder packageの追加
-
-### Docs v0.1.4
-
-- サンプルのスクリーンショットとTL;DRの文章の追加
