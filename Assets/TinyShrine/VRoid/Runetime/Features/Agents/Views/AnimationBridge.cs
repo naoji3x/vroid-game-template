@@ -20,6 +20,9 @@ namespace TinyShrine.VRoid.Agents.Views
         private int jumpHash;
         private int freeFallHash;
 
+        /// <summary>
+        /// Awake is called when the script instance is being loaded
+        /// </summary>
         private void Awake()
         {
             sourceAnimator = GetComponent<Animator>();
