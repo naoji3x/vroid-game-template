@@ -48,7 +48,7 @@ GameObject:
   - component: {fileID: 2202855654081159582}
   - component: {fileID: 4792335290125539403}
   m_Layer: 0
-  m_Name: ThirdPersonVroidArmature
+  m_Name: ThirdPersonVRoidArmature
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

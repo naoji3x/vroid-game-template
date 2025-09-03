@@ -751,7 +751,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6373034333942040628, guid: b34c4d96e1dba4f52a3160c695d84d22, type: 3}
       propertyPath: m_Name
-      value: SampleNavMeshVroidArmature_Variant
+      value: SampleNavMeshVRoidArmature_Variant
       objectReference: {fileID: 0}
     - target: {fileID: 7014561454715914946, guid: b34c4d96e1dba4f52a3160c695d84d22, type: 3}
       propertyPath: goal

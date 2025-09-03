@@ -169,7 +169,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7478457106834692490, guid: 18b366739dcf1440ca7e878e1b7ca695, type: 3}
       propertyPath: m_Name
-      value: 'SampleThirdPersonVroidArmature '
+      value: 'SampleThirdPersonVRoidArmature '
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

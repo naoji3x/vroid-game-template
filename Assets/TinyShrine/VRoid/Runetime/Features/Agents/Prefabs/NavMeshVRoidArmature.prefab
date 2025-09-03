@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 4707509579986695750}
   - component: {fileID: 1154074208953954258}
   m_Layer: 0
-  m_Name: NavMeshVroidArmature
+  m_Name: NavMeshVRoidArmature
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
