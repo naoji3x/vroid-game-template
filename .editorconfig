@@ -121,6 +121,7 @@ dotnet_style_qualification_for_event = false:suggestion
 
 # CSharpier と衝突する見た目系は無効化（CSharpierに一任）
 # 空行・改行・括弧の前後空白など
+dotnet_diagnostic.SA1000.severity = none   # new() のスペース要求を無効化
 dotnet_diagnostic.SA1009.severity = none   # ) の前の空白
 dotnet_diagnostic.SA1111.severity = none   # 最後の引数と ) の改行位置
 dotnet_diagnostic.SA1513.severity = none   # 閉じカッコの次に空行

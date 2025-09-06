@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 383584347425247125}
   - component: {fileID: 4707509579986695750}
   - component: {fileID: 1154074208953954258}
+  - component: {fileID: 6623450852591957558}
   m_Layer: 0
   m_Name: NavMeshVRoidArmature
   m_TagString: Untagged
@@ -106,6 +107,18 @@ MonoBehaviour:
   animatorController: {fileID: 22100000, guid: f56d164a031cd4835813a053a994aa8b, type: 2}
   speedParam: Speed
   motionSpeedParam: MotionSpeed
+--- !u!114 &6623450852591957558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2967083733358046500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c341ea1490234882a83d9bc809756f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8234351151424723265
 GameObject:
   m_ObjectHideFlags: 0

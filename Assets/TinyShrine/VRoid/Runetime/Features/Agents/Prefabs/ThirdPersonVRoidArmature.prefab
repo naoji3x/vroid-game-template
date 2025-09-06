@@ -47,6 +47,7 @@ GameObject:
   - component: {fileID: 2758037345894675689}
   - component: {fileID: 2202855654081159582}
   - component: {fileID: 4792335290125539403}
+  - component: {fileID: 6714467382900953168}
   m_Layer: 0
   m_Name: ThirdPersonVRoidArmature
   m_TagString: Untagged
@@ -231,6 +232,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animatorController: {fileID: 22100000, guid: f56d164a031cd4835813a053a994aa8b, type: 2}
+--- !u!114 &6714467382900953168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3336564028372185564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c341ea1490234882a83d9bc809756f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4247005590911748292
 GameObject:
   m_ObjectHideFlags: 0
