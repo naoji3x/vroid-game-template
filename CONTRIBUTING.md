@@ -45,26 +45,21 @@ npm install
 
 Unity Hub から本プロジェクトを開いてください。
 
-#### 4. 動作確認
-
-```bash
-npm run check
-```
-
-✅ すべてのチェックが通ることを確認してください。
-
 ---
 
 ## 🔄 開発ワークフロー
 
 ### ブランチ戦略
 
-| ブランチタイプ   | 命名規則          | 用途         |
-| ---------------- | ----------------- | ------------ |
-| 機能追加         | `feature/機能名`  | 新機能の開発 |
-| バグ修正         | `fix/修正内容`    | 不具合の修正 |
-| ホットフィックス | `hotfix/緊急修正` | 緊急バグ修正 |
-| リリース         | `release/v1.x.x`  | リリース準備 |
+このプロジェクトでは、作業内容によってブランチを分けて開発します：
+
+| 作業内容     | ブランチ名          | 使い道       | 例                          |
+| ------------ | ------------------- | ------------ | --------------------------- |
+| 新機能追加   | `feature/機能名`    | 新機能の開発 | `feature/vr-avatar-setup`   |
+| バグ修正     | `fix/修正内容`      | 不具合の修正 | `fix/animation-memory-leak` |
+| コード整理   | `refactor/対象範囲` | コード改善   | `refactor/add-event-bridge` |
+| 緊急修正     | `hotfix/緊急修正`   | 緊急バグ修正 | `hotfix/navmesh-crash`      |
+| リリース準備 | `release/v1.x.x`    | リリース準備 | `release/v1.2.0`            |
 
 ### コミットルール
 
@@ -136,7 +131,7 @@ fix bug
 npm run format
 
 # C# のみ
-npm run format:csharp
+npm run format:cs
 
 # JS/TS のみ
 npm run format:js
@@ -152,6 +147,59 @@ npm run format:md
 3. **説明**: 変更内容と理由を明確に記述
 4. **CI**: すべてのチェックが通ること
 
+### プルリクエストの手順
+
+#### 1. 開発準備
+
+```bash
+# 最新のmainブランチを取得
+git checkout main
+git pull origin main
+
+# 新しいブランチを作成
+git checkout -b feature/new-animation-system
+```
+
+#### 2. 開発とコミット
+
+```bash
+# 変更をステージング
+git add .
+
+# ルールに従ってコミット
+git commit -m "feat(animation): 新しいアニメーションシステムを追加"
+
+# GitHubにプッシュ
+git push origin feature/new-animation-system
+```
+
+#### 3. プルリクエスト作成
+
+- **タイトル**: コミットメッセージと同じ形式
+- **説明**: 何を変更したか、なぜ変更したか、テスト方法
+- **ラベル**: 適切なラベルを付ける（bug, enhancement, documentation等）
+
+#### 4. コードレビュー
+
+レビューでチェックする項目：
+
+- **UniTask/R3 の使い分け**: 適切な非同期処理の選択
+- **メモリ使用量**: ガベージコレクションの負荷確認
+- **エラー処理**: 例外処理の適切な実装
+- **プラットフォーム対応**: iOS/Android対応の確認
+- **リソース管理**: Addressablesの適切な解放
+
+#### 5. マージ後のお片付け
+
+```bash
+# mainブランチに戻る
+git checkout main
+git pull origin main
+
+# 使い終わったブランチを削除
+git branch -d feature/new-animation-system
+```
+
 ---
 
 ## 🚀 リリース手順
@@ -162,7 +210,7 @@ npm run format:md
 
 ```mermaid
 graph LR
-    A[develop] --> B[release/v1.x.x]
+    A[main] --> B[release/v1.x.x]
     B --> C[main]
     C --> D[v1.x.x タグ]
     D --> E[GitHub Release]

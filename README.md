@@ -33,7 +33,14 @@ Unityプロジェクトの初期セットアップには多くのノウハウと
 
 ---
 
-## 🛠 開発環境
+## � 開発ドキュメント
+
+- [DEVELOPMENT.md](DEVELOPMENT.md) - 開発者向けガイド（アーキテクチャ、コーディング規約、実装詳細）
+- [CONTRIBUTING.md](CONTRIBUTING.md) - コントリビューション・ガイド（プルリクエスト、開発環境構築）
+
+---
+
+## �🛠 開発環境
 
 - Unity 6000 LTS Universal 3D Template
 - UniVRM 0.129.3 (VRM 1.0 対応)
@@ -45,7 +52,7 @@ Unityプロジェクトの初期セットアップには多くのノウハウと
 ### 1. ソースコード
 
 - **ライセンス:** MIT License
-- 詳細は [LICENSE](LICENSE) ファイルを参照
+- 詳細は [LICENSE](LICENSE.txt) ファイルを参照
 
 ### 2. VRMファイル
 
@@ -59,32 +66,6 @@ Unityプロジェクトの初期セットアップには多くのノウハウと
   - 改変および改変モデルの再配布：可能
   - クレジット表記：不要
 - その他のVRMファイルを利用する場合は、それぞれのファイルの利用条件を必ずご確認ください。
-
----
-
-## 📜 ライセンス
-
-### MIT License（ソースコード部分）
-
-Copyright (c) 2025 Tiny Shrine
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,  
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
 
 ---
 
