@@ -31,6 +31,29 @@
 | .NET SDK     | 8.x以上    | C#コンパイル・テスト |
 | Git          | 最新版     | バージョン管理       |
 
+### 環境変数の設定（macOS）
+
+macOSでの開発に必要な環境変数を`~/.zshrc`に設定してください。
+
+#### .NET SDK関連の環境変数(dotnet@8をHomebrewでインストールした場合)
+
+```bash
+# ~/.zshrc に以下を追加
+export DOTNET_ROOT="/opt/homebrew/opt/dotnet@8/libexec"
+export PATH="/opt/homebrew/opt/dotnet@8/bin:$PATH"
+export DOTNET_MSBUILD_SDK_RESOLVER_CLI_DIR="$DOTNET_ROOT"
+```
+
+#### 設定の反映
+
+```bash
+# 設定を反映
+source ~/.zshrc
+
+# 設定確認
+dotnet --version
+```
+
 ### できること
 
 - **キャラクター制御**: NavMeshを使った自動移動

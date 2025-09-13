@@ -136,3 +136,21 @@ build/
 .env.development.local
 .env.test.local
 .env.production.local
+
+
+# LLM for Unity の同梱ランタイム一式（フォルダと .meta を丸ごと除外）
+Assets/StreamingAssets/undreamai-*/
+Assets/StreamingAssets/undreamai-*.meta
+
+# 大容量モデルも除外（必要なら .gitkeep だけ残す）
+Assets/StreamingAssets/Models/**
+!Assets/StreamingAssets/Models/.gitkeep
+Assets/StreamingAssets/Models.meta
+
+# Samples
+
+Assets/Samples/
+Assets/Samples.meta
+Assets/StreamingAssets/Models/**
+Assets/StreamingAssets/KnowledgeBaseGame.zip
+Assets/StreamingAssets/KnowledgeBaseGame.zip.meta

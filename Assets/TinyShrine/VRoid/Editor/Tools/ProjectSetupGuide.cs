@@ -19,7 +19,7 @@ namespace TinyShrine.VRoid.Editor.Tools
             }
         }
 
-        [MenuItem("Tools/Project/1. Show Setup Guide")]
+        [MenuItem("Tools/Project/Show Setup Guide")]
         public static void ShowSetupGuide()
         {
             ShowGuide();
@@ -60,12 +60,12 @@ namespace TinyShrine.VRoid.Editor.Tools
                 "Assets/TinyShrine/VRoid/Runtime/Features/Agent/Prefabs",
             };
             string defaultFontPath = "Assets/TinyShrine/Shared/Fonts/MPLUS2-Medium SDF.asset";
-            TmpFontReassignUtility.AssignDefaultFont(targetDirectories, defaultFontPath);
+            TMProFontReassignUtility.AssignDefaultFont(targetDirectories, defaultFontPath);
         }
 
         public static void ReimportVrms()
         {
-            VrmReimportUtility.ReimportAllVrms();
+            VRMReimportUtility.ReimportAllVrms();
         }
 
         private static void ShowGuide()

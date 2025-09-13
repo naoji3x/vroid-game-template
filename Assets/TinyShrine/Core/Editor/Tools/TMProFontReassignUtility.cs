@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 namespace TinyShrine.Core.Editor.Tools
 {
-    public static class TmpFontReassignUtility
+    public static class TMProFontReassignUtility
     {
         /// <summary>
         /// 指定されたディレクトリ内のPrefabとSceneファイルでTextMeshProUGUIのフォントがnullの場合にデフォルトフォントを設定する

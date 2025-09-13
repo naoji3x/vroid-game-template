@@ -1,12 +1,13 @@
 {
   "dependencies": {
+    "ai.undream.llm": "https://github.com/undreamai/LLMUnity.git",
     "com.annulusgames.lit-motion": "https://github.com/annulusgames/LitMotion.git?path=src/LitMotion/Assets/LitMotion",
-    "com.coffee.ui-effect": "5.9.6",
+    "com.coffee.ui-effect": "5.9.7",
     "com.cysharp.unitask": "2.5.10",
     "com.github-glitchenzo.nugetforunity": "4.5.0",
     "com.unity.addressables": "2.6.0",
     "com.unity.addressables.android": "1.0.6",
-    "com.unity.ai.navigation": "2.0.8",
+    "com.unity.ai.navigation": "2.0.9",
     "com.unity.cinemachine": "3.1.4",
     "com.unity.collab-proxy": "2.8.2",
     "com.unity.collections": "2.5.7",
