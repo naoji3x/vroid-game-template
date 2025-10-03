@@ -15,6 +15,39 @@ applyTo: '**/*.cs'
 - Fields (private 含む) = camelCase（先頭アンダースコア禁止）
 - 必要に応じて `this.` を付与してメンバー参照を明確化
 
+## 制御構文 / 波括弧
+
+- if / else / else if / for / foreach / while / do のブロックは、処理が 1 行であっても必ず波括弧 `{}` で囲む（one-liner 禁止）
+  - 早期 return / break / continue のみの場合でも例外なし
+  - 可読性と差分の安全性（後続行の追加時のバグ混入防止）のため
+
+例（NG）
+
+```csharp
+if (ready) DoWork();
+for (var i = 0; i < n; i++) DoWork(i);
+if (!ok) return;
+```
+
+例（OK）
+
+```csharp
+if (ready)
+{
+  DoWork();
+}
+
+for (var i = 0; i < n; i++)
+{
+  DoWork(i);
+}
+
+if (!ok)
+{
+  return;
+}
+```
+
 ## 型推論（var）の方針
 
 - 右辺で型が**一目で明確**な場合のみ `var` を使う
