@@ -8,6 +8,10 @@ The format is based on Keep a Changelog, and this project adheres to Semantic Ve
 
 ### Added
 
+- 音声認識機能の追加
+- 音声合成機能の追加
+- リップシンク機能の追加
+
 ### Changed
 
 ### Fixed
@@ -22,13 +26,26 @@ The format is based on Keep a Changelog, and this project adheres to Semantic Ve
 
 ### Docs
 
-> このファイルはプロジェクトの各リリースごとに更新してください。
+## [v1.1.0] - 2025-10-04
+
+### Added
+
+VRoidとのチャット機能を追加（LLM for Unityを使ったローカル生成AIでのチャット）。
+
+- サンプルシーンは Assets/TinyShrine/VRoid/Sample/Scenes/ChatSample.unity
+- コードは Assets/TinyShrine/VRoid/Runtime/Features/Chats/にあります。
+
+### Changed
+
+ファイル名の大文字小文字の見直し。Vrm → VRM、Vroid → VRoid。
+
+- Assets/TinyShrine/VRoid/Editor/Tools/VrmReimportUtility.cs
+- Assets/TinyShrine/VRoid/Runtime/Features/Agents/AnimatorControllers/VroidLocomotion.overrideController
+- Assets/TinyShrine/VRoid/Runtime/Features/Agents/AnimatorControllers/VroidLocomotionBridge.controller
 
 ## [v1.0.0] - 2025-09-06
 
 ### Added
-
-1.0リリース
 
 VRoidアバターを扱うUnity向けのオープンソース（MITライセンス）テンプレート:
 
