@@ -26,6 +26,12 @@ The format is based on Keep a Changelog, and this project adheres to Semantic Ve
 
 ### Docs
 
+## [v1.1.2] - 2025-10-25
+
+### Fixed
+
+- lefthookの設定でC#のフォーマッターとリンターの設定を汎用的なものに修正
+
 ## [v1.1.1] - 2025-10-12
 
 ### Build
