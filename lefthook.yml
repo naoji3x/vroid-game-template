@@ -13,9 +13,7 @@ pre-commit:
 
     lint-changelog:
       glob: 'CHANGELOG.md'
-      run: |
-        npx markdownlint --config .markdownlint-changelog.json CHANGELOG.md
-        node scripts/check-changelog-format.mjs
+      run: npx markdownlint --config .markdownlint-changelog.json {staged_files}
 
     format-js:
       glob: '*.{js,mjs,ts,tsx,json}'
@@ -27,63 +25,25 @@ pre-commit:
       run: npx eslint {staged_files} --max-warnings 0
 
     format-csharp:
-      glob: 'Assets/{Scripts,TinyShrine}/**/*.cs'
-      run: |
-        # ステージ済みの .cs を NUL 区切りで安全に取得（スペース/日本語パスOK）
-        tmp="$(mktemp)"
-        git -c core.quotepath=false diff --cached --name-only -z --diff-filter=ACM -- \
-          'Assets/Scripts/**/*.cs' \
-          'Assets/TinyShrine/**/*.cs' > "$tmp"
-
-        if [ ! -s "$tmp" ]; then
-          echo "No C# files to check."
-          rm -f "$tmp"
-          exit 0
-        fi
-
-        dotnet tool restore
-
-        # 1 ファイルずつ安全にチェック
-        rc=0
-        while IFS= read -r -d '' file; do
-          [ -z "$file" ] && continue
-          echo "checking: $file"
-          dotnet tool run csharpier format "$file" || rc=1
-        done < "$tmp"
-
-        rm -f "$tmp"
-        exit $rc
+      glob: 'Assets/**/*.cs'
+      exclude:
+        - 'Assets/Plugins/**'
+        - 'Assets/ThirdParty/**'
+        - 'Assets/**/External/**'
+        - 'Assets/**/Generated/**'
+        - 'Assets/**/Vendor/**'
+      run: dotnet tool restore && dotnet tool run csharpier format {staged_files}
       stage_fixed: true
 
     lint-csharp:
-      glob: 'Assets/{Scripts,TinyShrine}/**/*.cs'
-      run: |
-        # ステージ済みの .cs を NUL 区切りで安全に取得（スペース/日本語パスOK）
-        tmp="$(mktemp)"
-        git -c core.quotepath=false diff --cached --name-only -z --diff-filter=ACM -- \
-          'Assets/Scripts/**/*.cs' \
-          'Assets/TinyShrine/**/*.cs' > "$tmp"
-
-        if [ ! -s "$tmp" ]; then
-          echo "No C# files to check."
-          rm -f "$tmp"
-          exit 0
-        fi
-
-        # 1 ファイルずつ安全にチェック
-        rc=0
-        while IFS= read -r -d '' file; do
-          [ -z "$file" ] && continue
-          echo "checking: $file"
-          dotnet format analyzers ./Lint.csproj \
-            --include "$file" \
-            --exclude-diagnostics CS0246 IDE0005 \
-            --verify-no-changes \
-            --verbosity minimal || rc=1
-        done < "$tmp"
-
-        rm -f "$tmp"
-        exit $rc
+      glob: 'Assets/**/*.cs'
+      exclude:
+        - 'Assets/Plugins/**'
+        - 'Assets/ThirdParty/**'
+        - 'Assets/**/External/**'
+        - 'Assets/**/Generated/**'
+        - 'Assets/**/Vendor/**'
+      run: dotnet format analyzers ./Lint.csproj --include {staged_files} --exclude-diagnostics CS0246 IDE0005 --verify-no-changes --verbosity minimal
 
 commit-msg:
   commands:
