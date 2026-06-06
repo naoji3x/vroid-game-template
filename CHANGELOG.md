@@ -28,6 +28,12 @@ The format is based on Keep a Changelog, and this project adheres to Semantic Ve
 
 ### Docs
 
+## [v1.1.5] - 2026-06-06
+
+### Build
+
+- checkout, setup-node, action-gh-releaseをバージョンアップしnode24に対応
+
 ## [v1.1.4] - 2026-06-06
 
 ### Build
