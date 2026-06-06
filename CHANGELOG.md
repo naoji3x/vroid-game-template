@@ -24,9 +24,13 @@ The format is based on Keep a Changelog, and this project adheres to Semantic Ve
 
 ### Build
 
-- Unity 6.3LTS に更新
-
 ### Docs
+
+## [v1.1.6] - 2026-06-06
+
+### Build
+
+- Unity 6.3LTS に更新
 
 ## [v1.1.5] - 2026-06-06
 
