@@ -28,6 +28,12 @@ The format is based on Keep a Changelog, and this project adheres to Semantic Ve
 
 ### Docs
 
+## [v1.1.4] - 2026-06-06
+
+### Build
+
+- github actionsのnodeのバージョンを22 -> 24へ変更
+
 ## [v1.1.3] - 2026-06-06
 
 ### Fixed
