@@ -11,7 +11,7 @@ jobs:
       contents: write
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with: { fetch-depth: 0 }
 
       - name: Ensure tag commit is on main (safety)
@@ -21,7 +21,7 @@ jobs:
           git branch -r --contains $GITHUB_SHA | grep -q 'origin/main' || \
             (echo "::error::Tag commit is not on main. Abort." && exit 1)
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with: { node-version: '24' }
 
       - name: Extract Unity / App versions
@@ -47,7 +47,7 @@ jobs:
             HEAD
 
       - name: Create GitHub Release & upload assets
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           tag_name: ${{ github.ref_name }}
           name: ${{ github.ref_name }} (Unity ${{ env.UNITY_VERSION }})
