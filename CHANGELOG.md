@@ -24,7 +24,15 @@ The format is based on Keep a Changelog, and this project adheres to Semantic Ve
 
 ### Build
 
+- Unity 6.3LTS に更新
+
 ### Docs
+
+## [v1.1.3] - 2026-06-06
+
+### Fixed
+
+- vscodeでエラーとなるため、global.jsonを書き換え。ローカルcにインストールされているdotnetを9.0.200以上に更新する必要があります。
 
 ## [v1.1.2] - 2025-10-25
 
