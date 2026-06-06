@@ -22,7 +22,7 @@ jobs:
             (echo "::error::Tag commit is not on main. Abort." && exit 1)
 
       - uses: actions/setup-node@v4
-        with: { node-version: '22' }
+        with: { node-version: '24' }
 
       - name: Extract Unity / App versions
         run: node scripts/extract_versions.mjs >> $GITHUB_ENV
