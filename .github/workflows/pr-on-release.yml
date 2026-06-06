@@ -17,7 +17,7 @@ jobs:
         with: { fetch-depth: 0 }
 
       - uses: actions/setup-node@v4
-        with: { node-version: '22' }
+        with: { node-version: '24' }
 
       # ブランチ名からタグ（vX.Y.Z）を抽出
       - name: Derive tag from branch
@@ -34,7 +34,7 @@ jobs:
 
       # 既存PRが無ければ作成（idempotent）
       - name: Open or update PR
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           script: |
             const tag = process.env.TAG;                  // 例: v1.4.0
